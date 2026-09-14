@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rack-Scale Embedded Power and Environmental Control Platform — Hortanica</title>
+  <meta name="description" content="A market-ready distributed embedded-control platform integrating rack-scale power management, PMBus control, high-current DC distribution, fault management, and BLE mesh environmental sensing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="wordmark" href="../../">HORTANICA</a>
+      <div class="rule"></div>
+      <nav aria-label="Primary">
+        <a href="../../">Home</a>
+        <a href="../../research/">Research</a>
+        <a class="active" href="../">Projects</a>
+        <a href="../../about/">About</a>
+      </nav>
+      <div class="rule"></div>
+    </div>
+  </header>
+  <main class="wrap">
+    <header class="paper-header">
+      <a class="back-link" href="../">← Projects index</a>
+      <p class="paper-status">Market-ready white-box platform</p>
+      <h1>Rack-Scale Embedded Power and Environmental Control Platform</h1>
+      <div class="primary-record">
+        <strong>System scope</strong>
+        <p>Rack-scale power · embedded control · high-current DC distribution · PMBus · BLE mesh sensing · electrothermal fault management</p>
+      </div>
+      <div class="paper-meta">
+        <div><span class="meta-label">Development</span><p>Designed, built, integrated, and productized to a market-ready white-box state</p></div>
+        <div><span class="meta-label">Original application</span><p>Controlled-environment horticulture</p></div>
+      </div>
+    </header>
+    <article class="paper-body">
+      <section>
+        <h2>Overview</h2>
+        <p>I designed and built a distributed embedded-control architecture for high-power modular loads using Advanced Energy rack-mount, remotely managed, hot-swappable power infrastructure. The power layer used 4 kW PSU blades and supported approximately 12 kW of capacity per rack unit.</p>
+        <p>The goal was not simply to deliver power. The platform was built to observe and control the electrical system while relating that behavior to the physical environment around the installation. Electrical state, thermal response, hardware faults, and environmental behavior were treated as interacting parts of one system.</p>
+      </section>
+      <section>
+        <h2>System architecture</h2>
+        <p><strong>Rack-scale power layer.</strong> Advanced Energy hot-swappable PSU infrastructure provided remotely managed high-density power delivery, with approximately 12 kW per rack unit using 4 kW power-supply blades.</p>
+        <p><strong>Embedded control layer.</strong> A microcontroller-based distribution controller interfaced with the power system over PMBus for telemetry and control while supervising downstream high-current DC distribution to individual high-power modules.</p>
+        <p><strong>Equipment monitoring and fault response.</strong> The control layer monitored voltage, current, load behavior, thermal behavior, and module health. It was designed to detect abnormal operating conditions, adjust electrical operating points, isolate faults, and preserve service to unaffected modules.</p>
+        <p><strong>Environmental sensing layer.</strong> A separate BLE mesh sensing network provided distributed environmental telemetry around the installation. Those measurements could be correlated with electrical load, thermal behavior, airflow, and system operating state.</p>
+      </section>
+      <section>
+        <h2>Observability and control</h2>
+        <p>The architecture separated observability into two interacting domains. Equipment health was derived from electrical and power-system telemetry. Environment health was derived from distributed sensing of the physical environment.</p>
+        <p>The control objective was to correlate those domains rather than treat power delivery and environmental performance as separate systems. A change in load, efficiency, temperature, airflow, or hardware condition could therefore be evaluated in the context of both the equipment and the environment it was driving.</p>
+      </section>
+      <section>
+        <h2>Commercialization</h2>
+        <p>This was developed beyond a proof of concept into a market-ready white-box product. The intended path was for another company or systems integrator to take over branding, deployment, support, and commercialization rather than for me to build a long-term operating business around it.</p>
+        <p>That handoff did not occur. COVID-era disruption and the more risk-averse environment that followed made outside adoption substantially harder, and I ultimately chose not to dedicate additional years to commercializing the platform myself.</p>
+      </section>
+      <section>
+        <h2>Validation environment</h2>
+        <p>Controlled-environment horticulture was selected as the original application because inefficiencies and control changes become visible across several downstream variables at once, including heat load, HVAC demand, humidity, airflow, watering demand, and biological response.</p>
+        <p>That made the application useful as a system-level validation environment: changes in electrical and thermal behavior could be compared against measurable consequences in the physical environment rather than evaluated only at the power-delivery layer.</p>
+      </section>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="rule"></div>
+      <p>Hortanica · Michael J. Horton Jr. · 2026</p>
+    </div>
+  </footer>
+</body>
+</html>
