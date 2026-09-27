@@ -54,11 +54,14 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
   margin: 0; font-size: clamp(2.25rem, 6vw, 4.35rem);
   line-height: 1.08; letter-spacing: 0.01em;
 }
+.about-title h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
 .summary { max-width: 660px; margin: 32px auto 0; font-size: 1.08rem; }
 .summary + .summary { margin-top: 18px; }
 .contents {
   margin-top: 82px; padding: 48px 0 72px; border-top: 1px solid var(--rule);
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px;
 }
 .contents article { text-align: center; }
 .section-no { margin: 0 0 8px; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.12em; }
@@ -72,14 +75,26 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
 .page-title > p:last-child { max-width: 680px; margin: 28px auto 0; }
 .research-list { border-top: 1px solid var(--rule); padding-bottom: 72px; }
 .record { padding: 42px 0 46px; border-bottom: 1px solid #b7b3a7; }
-.record-status { margin: 0 0 13px; }
+.record-status { margin: 0 0 12px; }
+.project-name {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
 .record h2 {
-  max-width: 800px; margin: 0 0 18px;
-  font-size: clamp(1.65rem, 4vw, 2.45rem); line-height: 1.2;
+  max-width: 800px; margin: 0 0 16px;
+  font-size: clamp(1.3rem, 2.7vw, 1.9rem); line-height: 1.24;
 }
 .record h2 a { text-decoration: none; }
 .record h2 a:hover { color: var(--green); }
-.record > p:not(.record-status) { max-width: 740px; color: #4e4d46; }
+.record > p:not(.record-status):not(.project-name) {
+  max-width: 740px;
+  margin-top: 0;
+  color: #4e4d46;
+  font-size: 1.01rem;
+}
 .record-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 24px; color: var(--muted); font-size: 0.9rem; }
 .detail-link { display: inline-block; margin-top: 18px; color: var(--green); text-underline-offset: 4px; }
 .paper-header { max-width: 830px; margin: 0 auto; padding: 70px 0 44px; text-align: center; }
@@ -113,7 +128,6 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
 .about-body { max-width: 700px; margin: 0 auto; padding: 8px 0 84px; border-top: 1px solid var(--rule); }
 .about-body h2 { margin: 40px 0 12px; font-size: 1.65rem; text-align: center; }
 .about-body p { color: #46453f; }
-.about-title h1 {font-size: clamp(2rem, 4vw, 3rem); }
 .site-footer { padding: 0 0 36px; text-align: center; }
 .site-footer p {
   margin: 18px 0 0; color: var(--muted); font-size: 0.72rem;
@@ -126,7 +140,7 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
   body { font-size: 16px; }
   .wrap { width: min(calc(100% - 28px), var(--max)); }
   .masthead { padding-top: 30px; }
-  nav { gap: 16px; font-size: 0.69rem; }
+  nav { gap: 22px; font-size: 0.72rem; }
   .home { padding-top: 60px; }
   .contents { margin-top: 68px; grid-template-columns: 1fr; gap: 42px; }
   .page-title { padding-top: 58px; }
