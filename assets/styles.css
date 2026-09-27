@@ -84,19 +84,18 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
 }
 .record h2 {
   max-width: 800px;
-  margin: 0 0 16px;
-  font-family: "Libre Caslon Text", Georgia, "Times New Roman", serif;
-  font-size: clamp(1.25rem, 2.3vw, 1.7rem);
-  font-weight: 400;
-  line-height: 1.35;
+  margin: 0 0 14px;
+  font-size: clamp(1.3rem, 2.7vw, 1.9rem);
+  line-height: 1.24;
 }
 .record h2 a { text-decoration: none; }
 .record h2 a:hover { color: var(--green); }
 .record > p:not(.record-status):not(.project-name) {
-  max-width: 740px;
-  margin-top: 0;
-  color: #4e4d46;
-  font-size: 1.01rem;
+  max-width: 700px;
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.62;
 }
 .record-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 24px; color: var(--muted); font-size: 0.9rem; }
 .detail-link { display: inline-block; margin-top: 18px; color: var(--green); text-underline-offset: 4px; }
