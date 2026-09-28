@@ -86,7 +86,7 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
   max-width: 800px;
   margin: 0 0 16px;
   font-family: "Libre Caslon Text", Georgia, "Times New Roman", serif;
-  font-size: clamp(1.3rem, 2.7vw, 1.9rem);
+  font-size: clamp(1.3rem, 2.7vw, 1.15rem);
   font-weight: 400;
   line-height: 1.28;
 }
@@ -96,7 +96,7 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
   max-width: 700px;
   margin: 0 0 4px;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.96rem;
   line-height: 1.62;
 }
 .record-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 24px; color: var(--muted); font-size: 0.9rem; }
