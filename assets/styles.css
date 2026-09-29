@@ -247,11 +247,18 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
   font-size: 0.95rem;
   line-height: 1.45;
 }
-.publication-download {
-  margin: 20px 0 0 !important;
-  color: var(--green) !important;
+.publication-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(140, 145, 136, 0.42);
 }
-.publication-download a { text-underline-offset: 4px; }
+.publication-downloads a {
+  color: var(--green);
+  text-underline-offset: 4px;
+}
 
 .note { color: var(--muted) !important; font-style: italic; }
 .about-body { max-width: 700px; margin: 0 auto; padding: 8px 0 84px; border-top: 1px solid var(--rule); }
