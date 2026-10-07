@@ -56,9 +56,7 @@
 }
 
 .phase-entry {
-  display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 30px;
+  display: block;
   padding: 44px 0 48px;
   border-top: 1px solid #b7b3a7;
 }
@@ -71,7 +69,7 @@
 }
 .phase-entry h2 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.55rem, 2.8vw, 2.15rem);
   line-height: 1.05;
 }
 .phase-entry h2 a { text-decoration: none; }
@@ -79,8 +77,8 @@
 .phase-question {
   margin: 12px 0 0;
   color: var(--green-soft);
-  font-size: 1.05rem;
-  font-style: italic;
+  font-size: 1.02rem;
+  font-style: normal;
 }
 .phase-description {
   max-width: 760px;
@@ -150,8 +148,6 @@
   }
   .phase-overview-heading p { margin-top: 6px; }
   .phase-entry {
-    grid-template-columns: 1fr;
-    gap: 8px;
     padding: 34px 0 38px;
   }
   .phase-header { padding-top: 54px; }
