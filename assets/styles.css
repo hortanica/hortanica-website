@@ -229,6 +229,20 @@ h1, h2, h3 { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 4
 .paper-body section { padding: 34px 0 38px; border-top: 1px solid var(--rule); }
 .paper-body h2 { margin: 0 0 15px; font-size: 1.75rem; }
 .paper-body p { margin: 0 0 18px; color: #444740; }
+
+.systems-card {
+  margin: 0 0 34px;
+  padding: 20px 24px;
+  background: var(--panel);
+  border-radius: 10px;
+}
+.systems-card p {
+  margin: 5px 0 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
 .publication-record { padding-bottom: 0 !important; }
 .publication-card {
   padding: 22px 24px;
