@@ -1,10 +1,11 @@
-/* Prototype-only layout for Research_new. The current site stylesheet remains untouched. */
+/* Research program layout. */
 
 .research-program { padding-bottom: 84px; }
 
 .program-header {
-  max-width: 820px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: 76px 0 54px;
   text-align: left;
 }
@@ -12,7 +13,9 @@
 .program-header h1 {
   margin: 0;
   text-align: center;
-  font-size: clamp(2.4rem, 6vw, 4.35rem);
+  max-width: 900px;
+  margin-inline: auto;
+  font-size: clamp(2.25rem, 5.2vw, 3.8rem);
   line-height: 1.08;
 }
 .program-intro {
@@ -69,8 +72,8 @@
 }
 .phase-entry h2 {
   margin: 0;
-  font-size: clamp(1.55rem, 2.8vw, 2.15rem);
-  line-height: 1.05;
+  font-size: clamp(1.5rem, 2.35vw, 1.9rem);
+  line-height: 1.12;
 }
 .phase-entry h2 a { text-decoration: none; }
 .phase-entry h2 a:hover { color: var(--green); }
@@ -142,7 +145,17 @@
 }
 
 @media (max-width: 640px) {
-  .program-header { padding-top: 58px; }
+  .program-header { padding: 52px 0 42px; }
+  .program-header h1 {
+    max-width: 340px;
+    font-size: clamp(2rem, 10vw, 2.45rem);
+    line-height: 1.06;
+  }
+  .program-intro { margin-top: 30px; }
+  .phase-entry h2 {
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
   .phase-overview-heading {
     display: block;
   }
