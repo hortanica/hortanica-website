@@ -6,9 +6,13 @@
   const query = $('map-search');
   const reset = $('map-reset');
   const feedback = $('diagram-feedback');
+  const showAllButton = $('map-show-all');
+  const guide = $('diagram-guide-text');
   let graph = null;
   let matches = [];
   let currentFocus = null;
+  let focusedView = false;
+  let previousScrollY = null;
 
   function svg(tag, attrs = {}, text) {
     const el = document.createElementNS(SVG_NS, tag);
@@ -82,10 +86,30 @@
     a.appendChild(svg('text',{x:x+w/2-(count===null?0:14),y:y+h/2+1,class:'node-label'+(small?' system-label':'')},label));
     if (count !== null) a.appendChild(svg('text',{x:x+w-15,y:y+h/2+1,'text-anchor':'end',class:'node-label system-count'},`[${count}]`));
     a.appendChild(svg('title',{},`${label} — open page`));
-    a.addEventListener('pointerenter',() => setFocus({type,id}));
-    a.addEventListener('pointerleave',() => setFocus(null));
-    a.addEventListener('focus',() => setFocus({type,id}));
-    a.addEventListener('blur',() => setFocus(null));
+    let hoverTimer = null;
+    a.addEventListener('pointerenter',() => {
+      if (focusedView) return;
+      setFocus({type,id});
+      if (type === 'paper' || type === 'system') {
+        hoverTimer = window.setTimeout(() => {
+          hoverTimer = null;
+          enterFocusedView({type,id});
+        }, 280);
+      }
+    });
+    a.addEventListener('pointerleave',() => {
+      if (hoverTimer !== null) window.clearTimeout(hoverTimer);
+      hoverTimer = null;
+      if (!focusedView) setFocus(null);
+    });
+    a.addEventListener('focus',() => { if (!focusedView) setFocus({type,id}); });
+    a.addEventListener('blur',() => { if (!focusedView) setFocus(null); });
+    a.addEventListener('keydown',(event) => {
+      if (event.key === ' ' && !focusedView && (type==='paper' || type==='system')) {
+        event.preventDefault();
+        enterFocusedView({type,id});
+      }
+    });
     parent.appendChild(a);
   }
 
@@ -140,6 +164,125 @@
     if (graph.systems.some(s=>s.name.length>52)) console.warn('Very long system labels may need resizing');
   }
 
+  // Focus keeps one node and its immediate neighborhood together in a compact map.
+  // The original full diagram can be restored at any time without changing links or source data.
+  function enterFocusedView(selected) {
+    if (focusedView || !graph) return;
+    focusedView = true;
+    previousScrollY = window.scrollY;
+    currentFocus = selected;
+    const phaseX = 35, phaseW = 194, paperX = 334, paperW = 286;
+    const systemX = 778, systemW = 307;
+    const output = svg('svg',{
+      viewBox:'0 0 1120 480', role:'img',
+      'aria-label':`Focused connections for ${selected.id}`
+    });
+    const edges = svg('g',{'aria-hidden':'true'}), nodes=svg('g');
+    const columnHeader = (label,x) => output.appendChild(svg('text',{x,y:42,class:'column-label'},label));
+    columnHeader('Phases',phaseX+phaseW/2);
+    columnHeader('Papers',paperX+paperW/2);
+    columnHeader('Systems',systemX+systemW/2);
+
+    const phaseEdge = (p,phaseY,paperY) => {
+      edges.appendChild(svg('path',{
+        d:`M ${phaseX+phaseW} ${phaseY} C 272 ${phaseY}, 287 ${paperY}, ${paperX} ${paperY}`,
+        stroke:color(p.phase),class:'edge phase-edge'
+      }));
+    };
+    const systemEdge = (p,paperY,systemY) => {
+      edges.appendChild(svg('path',{
+        d:`M ${paperX+paperW} ${paperY} C 694 ${paperY}, 711 ${systemY}, ${systemX} ${systemY}`,
+        stroke:color(p.phase),class:'edge system-edge'
+      }));
+    };
+
+    let height;
+    if (selected.type === 'system') {
+      const linked = new Set(graph.edges.filter(e=>e.system===selected.id).map(e=>e.paper));
+      const papers = graph.papers.filter(p=>linked.has(p.name));
+      const grouped = graph.phases.map(phase=>({phase, papers:papers.filter(p=>p.phase===phase.name)}))
+        .filter(g=>g.papers.length);
+      const paperY=new Map(), phaseY=new Map();
+      let y=110;
+      for (const g of grouped) {
+        const first=y;
+        g.papers.forEach(p=>{paperY.set(p.name,y); y+=36;});
+        phaseY.set(g.phase.name,(first+y-36)/2);
+        y+=16;
+      }
+      const coords=[...paperY.values()];
+      const center=coords.length?(coords[0]+coords.at(-1))/2:190;
+      height=Math.max(220,y+30);
+      for (const g of grouped) {
+        const yc=phaseY.get(g.phase.name);
+        drawNode(nodes,{x:phaseX,y:yc-19,w:phaseW,h:38,type:'phase',id:g.phase.name,
+          url:g.phase.url,label:g.phase.name,fill:g.phase.color+'24',stroke:g.phase.color});
+        for (const p of g.papers) {
+          const py=paperY.get(p.name);
+          phaseEdge(p,yc,py); systemEdge(p,py,center);
+          drawNode(nodes,{x:paperX,y:py-16,w:paperW,h:32,type:'paper',id:p.name,
+            url:p.url,label:p.name,fill:color(p.phase)+'23',stroke:color(p.phase)});
+        }
+      }
+      const sys=graph.systems.find(x=>x.name===selected.id);
+      drawNode(nodes,{x:systemX,y:center-18,w:systemW,h:36,type:'system',id:sys.name,
+        url:sys.url,label:sys.name,fill:'#f2f4f2',stroke:'#79887e',small:true,count:sys.count});
+      feedback.textContent=`${sys.name}: ${papers.length} connected paper${papers.length===1?'':'s'}. Select any label to open its page; choose “Show full map” to return.`;
+    } else {
+      const paper=graph.papers.find(p=>p.name===selected.id);
+      if (!paper) { focusedView=false;return; }
+      const phase=graph.phases.find(x=>x.name===paper.phase);
+      const linked = new Set(graph.edges.filter(e=>e.paper===paper.name).map(e=>e.system));
+      const systems = graph.systems.filter(s=>linked.has(s.name));
+      const initial=105, step=27;
+      const end=initial+(Math.max(1,systems.length)-1)*step;
+      const center=(initial+end)/2;
+      height=Math.max(235,end+65);
+      drawNode(nodes,{x:phaseX,y:center-19,w:phaseW,h:38,type:'phase',id:phase.name,
+        url:phase.url,label:phase.name,fill:phase.color+'24',stroke:phase.color});
+      drawNode(nodes,{x:paperX,y:center-17,w:paperW,h:34,type:'paper',id:paper.name,
+        url:paper.url,label:paper.name,fill:phase.color+'23',stroke:phase.color});
+      phaseEdge(paper,center,center);
+      systems.forEach((sys,i)=>{
+        const sy=initial+i*step;
+        systemEdge(paper,center,sy);
+        drawNode(nodes,{x:systemX,y:sy-12,w:systemW,h:24,type:'system',id:sys.name,
+          url:sys.url,label:sys.name,fill:'#f2f4f2',stroke:'#79887e',small:true,count:sys.count});
+      });
+      if (!systems.length) nodes.appendChild(svg('text',{
+        x:systemX+systemW/2,y:center,class:'focus-no-systems'
+      },'No systems assigned in the workbook'));
+      feedback.textContent=`${paper.name}: ${systems.length} mapped system${systems.length===1?'':'s'}. Select any label to open its page; choose “Show full map” to return.`;
+    }
+    output.setAttribute('viewBox',`0 0 1120 ${height}`);
+    output.append(edges,nodes);
+    canvas.classList.add('focused');
+    canvas.replaceChildren(output);
+    showAllButton.hidden=false;
+    guide.textContent=`Focused connections: ${selected.id}`;
+    // The triggering node may be below the fold in the full map. Bring the compact
+    // view into the viewport so the system and paper columns are visible together.
+    const top=window.scrollY+canvas.getBoundingClientRect().top-80;
+    window.scrollTo({top:Math.max(0,top),behavior:'auto'});
+  }
+
+  function restoreFullMap() {
+    if (!focusedView || !graph) return;
+    focusedView=false;
+    currentFocus=null;
+    canvas.classList.remove('focused');
+    showAllButton.hidden=true;
+    guide.textContent='Hover over a paper or system to isolate its connections.';
+    renderMap();
+    setFocus(null);
+    if (previousScrollY!==null) window.scrollTo({top:previousScrollY,behavior:'auto'});
+    previousScrollY=null;
+  }
+  showAllButton.addEventListener('click',restoreFullMap);
+  document.addEventListener('keydown', event => {
+    if (event.key==='Escape' && focusedView) restoreFullMap();
+  });
+
   function renderMobile() {
     const holder=$('mobile-phases');
     for(const phase of graph.phases) {
@@ -173,6 +316,7 @@
   }
 
   function applySearch() {
+    if (focusedView) restoreFullMap();
     const term=query.value.trim().toLowerCase();
     const nodes=canvas.querySelectorAll('.map-node');
     if (!term) { setFocus(null); nodes.forEach(n=>n.classList.remove('dimmed','emphasized')); }

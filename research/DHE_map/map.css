@@ -17,6 +17,19 @@
 .diagram-shell { border-top: 1px solid var(--rule); padding-top: 14px; }
 .diagram-guide { display:flex; align-items:center; justify-content: space-between; gap:20px; color:var(--muted); font-size:.86rem; padding: 0 6px 12px; }
 .diagram-guide a, .data-note a { color:var(--green); }
+.diagram-actions { display:flex; align-items:center; flex-wrap:wrap; justify-content:flex-end; gap:22px; }
+.diagram-actions button { font:inherit; cursor:pointer; color:var(--green); background:var(--panel); border:1px solid var(--rule); padding:6px 12px; border-radius:4px; }
+.diagram-actions button:hover, .diagram-actions button:focus-visible { background:#e6eee7; }
+.diagram-actions button[hidden] { display:none; }
+.diagram-canvas.focused svg { min-width:0; }
+.diagram-canvas.focused .edge { opacity:.63; stroke-width:1.5; }
+.diagram-canvas.focused .edge.phase-edge { opacity:.8; }
+.diagram-canvas.focused .node-label { font-size:15px; }
+.diagram-canvas.focused .system-label { font-size:13px; }
+.diagram-canvas.focused .system-count { font-size:12px; }
+.diagram-canvas.focused .map-node .node-rect { stroke-width:1.35; }
+.diagram-canvas .focus-no-systems { font:italic 15px Arial,sans-serif; fill:#64675f; text-anchor:middle; }
+
 .diagram-canvas { width:100%; overflow-x:auto; border:1px solid #d9d7d0; background:#fffefa; border-radius: 5px; }
 .diagram-canvas svg { display:block; width:100%; min-width: 1100px; height:auto; }
 .diagram-canvas .edge { fill:none; stroke-width: 1.05; opacity:.25; pointer-events:none; transition: opacity .12s ease; }

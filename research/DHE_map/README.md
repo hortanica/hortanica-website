@@ -27,6 +27,8 @@ Commit the updated workbook and regenerated `research-map.json` to GitHub togeth
 - `FutureYou` currently opens a prototype-only holding page because its manuscript PDF has not yet appeared in the OneDrive website papers folder.
 - Every system links to `/research/DHE_map/systems/?system=<slug>`, a reusable page that lists its linked papers grouped by phase.
 
+On desktop, pause the pointer over a **paper** or **system** for approximately 0.3 seconds to switch to a compact view of only its direct connections. Click any focused node to open its linked page. Use **Show full map** or **Escape** to return to the complete graph. Keyboard users may focus a paper/system link and press **Space** to open the compact connection view (Enter still follows the link).
+
 On narrow screens, the graph is replaced with a phase/paper/system explorer because shrinking the 3-column diagram to mobile width makes the names illegible.
 
 ## Data note
