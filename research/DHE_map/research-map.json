@@ -15,7 +15,7 @@
       "order": 1,
       "color": "#2F80ED",
       "url": "/research/foundation/",
-      "paperCount": 8,
+      "paperCount": 6,
       "description": "How your system works for you."
     },
     {
@@ -24,7 +24,7 @@
       "order": 2,
       "color": "#18B982",
       "url": "/research/construction/",
-      "paperCount": 6,
+      "paperCount": 8,
       "description": "How your reality is built and shaped."
     },
     {
@@ -58,14 +58,14 @@
       "description": "What changes when you change what counts as “the system”?"
     },
     {
-      "name": "Containment",
-      "slug": "containment",
+      "name": "Relevance",
+      "slug": "relevance",
       "phase": "Foundation",
       "phaseOrder": 1,
       "order": 2,
-      "url": "/research/grey-matter-containment/",
+      "url": "/research/historical-relevance-audit/",
       "detailPending": false,
-      "description": "Just because you felt it, did it matter?"
+      "description": "You know it. But does it matter right now?"
     },
     {
       "name": "EndGame",
@@ -78,114 +78,114 @@
       "description": "You saw what happened. Do you know why?"
     },
     {
+      "name": "Containment",
+      "slug": "containment",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 4,
+      "url": "/research/grey-matter-containment/",
+      "detailPending": false,
+      "description": "Just because you felt it, did it matter?"
+    },
+    {
       "name": "How Long Is a Thought?",
       "slug": "how-long-is-a-thought",
       "phase": "Foundation",
       "phaseOrder": 1,
-      "order": 4,
+      "order": 5,
       "url": "/research/how-long-is-a-thought/",
       "detailPending": false,
       "description": "How long was that thought—for you, or for me?"
-    },
-    {
-      "name": "Icarus",
-      "slug": "icarus",
-      "phase": "Foundation",
-      "phaseOrder": 1,
-      "order": 5,
-      "url": "/research/constrained-realization/",
-      "detailPending": false,
-      "description": "Is your past still controlling you, or merely explaining you?"
-    },
-    {
-      "name": "Squirrel",
-      "slug": "squirrel",
-      "phase": "Foundation",
-      "phaseOrder": 1,
-      "order": 6,
-      "url": "/research/task-initiation-failure/",
-      "detailPending": false,
-      "description": "You wanted to do it. So why didn’t you?"
     },
     {
       "name": "Time",
       "slug": "time",
       "phase": "Foundation",
       "phaseOrder": 1,
-      "order": 7,
+      "order": 6,
       "url": "/research/boundary-relative-temporal-experience/",
       "detailPending": false,
       "description": "Knowing the clock is not obeying the clock."
     },
     {
+      "name": "Icarus",
+      "slug": "icarus",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 7,
+      "url": "/research/constrained-realization/",
+      "detailPending": false,
+      "description": "Is your past still controlling you, or merely explaining you?"
+    },
+    {
       "name": "You Are Here",
       "slug": "you-are-here",
-      "phase": "Foundation",
-      "phaseOrder": 1,
+      "phase": "Construction",
+      "phaseOrder": 2,
       "order": 8,
       "url": "/research/bottleneck-relative-phenomenal-content/",
       "detailPending": false,
       "description": "What you experience is not everything running underneath."
     },
     {
-      "name": "Relevance",
-      "slug": "relevance",
+      "name": "Squirrel",
+      "slug": "squirrel",
       "phase": "Construction",
       "phaseOrder": 2,
       "order": 9,
-      "url": "/research/historical-relevance-audit/",
+      "url": "/research/task-initiation-failure/",
       "detailPending": false,
-      "description": "You know it. But does it matter right now?"
-    },
-    {
-      "name": "Push",
-      "slug": "push",
-      "phase": "Construction",
-      "phaseOrder": 2,
-      "order": 10,
-      "url": "/research/knowledge-handoffs-under-change/",
-      "detailPending": false,
-      "description": "Were you incapable, or did the world change underneath you?"
-    },
-    {
-      "name": "Pull",
-      "slug": "pull",
-      "phase": "Construction",
-      "phaseOrder": 2,
-      "order": 11,
-      "url": "/research/when-an-alternative-becomes-possible/",
-      "detailPending": false,
-      "description": "Did you solve the problem or finally see the other one?"
-    },
-    {
-      "name": "PhoneWalletKeys",
-      "slug": "phonewalletkeys",
-      "phase": "Construction",
-      "phaseOrder": 2,
-      "order": 12,
-      "url": "/research/action-specific-history/",
-      "detailPending": false,
-      "description": "Are you choosing something new, or forgetting what’s old?"
+      "description": "You wanted to do it. So why didn’t you?"
     },
     {
       "name": "FuckYourFeelings",
       "slug": "fuckyourfeelings",
       "phase": "Construction",
       "phaseOrder": 2,
-      "order": 13,
+      "order": 10,
       "url": "/research/emotional-reality-before-explanation/",
       "detailPending": false,
       "description": "Your feelings are real. Maybe?"
+    },
+    {
+      "name": "PhoneWalletKeys",
+      "slug": "phonewalletkeys",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 11,
+      "url": "/research/action-specific-history/",
+      "detailPending": false,
+      "description": "Are you choosing something new, or forgetting what’s old?"
+    },
+    {
+      "name": "Pull",
+      "slug": "pull",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 12,
+      "url": "/research/when-an-alternative-becomes-possible/",
+      "detailPending": false,
+      "description": "Did you solve the problem or finally see the other one?"
     },
     {
       "name": "Weight",
       "slug": "weight",
       "phase": "Construction",
       "phaseOrder": 2,
-      "order": 14,
+      "order": 13,
       "url": "/research/weight-same-words-different-consequence/",
       "detailPending": false,
       "description": "You understand the words. But do they mean anything to you?"
+    },
+    {
+      "name": "Push",
+      "slug": "push",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 14,
+      "url": "/research/knowledge-handoffs-under-change/",
+      "detailPending": false,
+      "description": "Were you incapable, or did the world change underneath you?"
     },
     {
       "name": "WhatchyaDoin",
@@ -193,7 +193,7 @@
       "phase": "Action",
       "phaseOrder": 3,
       "order": 15,
-      "url": "/research/DHE_map/papers/whatchyadoin/",
+      "url": "/research/whatchyadoin/",
       "detailPending": false,
       "description": "When “I want to do this” becomes “I am doing this,” what changed?"
     },
@@ -203,9 +203,9 @@
       "phase": "Integration",
       "phaseOrder": 4,
       "order": 16,
-      "url": "/research/DHE_map/papers/?paper=futureyou",
-      "detailPending": true,
-      "description": "Manuscript summary pending."
+      "url": "/research/futureyou/",
+      "detailPending": false,
+      "description": "How does what feels possible today shape what you encounter next?"
     }
   ],
   "systems": [
@@ -581,6 +581,78 @@
   "edges": [
     {
       "phase": "Foundation",
+      "paper": "Relevance",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E061"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Relevance",
+      "system": "Prefrontal cortex, general",
+      "id": "E062"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Relevance",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E063"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Relevance",
+      "system": "Basal ganglia / striatum",
+      "id": "E064"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Relevance",
+      "system": "Prospective-memory / timing systems",
+      "id": "E065"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Dorsal premotor cortex",
+      "id": "E010"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "SMA / pre-SMA",
+      "id": "E011"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Motor cortex",
+      "id": "E012"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Posterior parietal cortex",
+      "id": "E013"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Basal ganglia / striatum",
+      "id": "E014"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Cerebellum",
+      "id": "E015"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Premotor cortex",
+      "id": "E016"
+    },
+    {
+      "phase": "Foundation",
       "paper": "Containment",
       "system": "Anterior insula",
       "id": "E001"
@@ -635,48 +707,6 @@
     },
     {
       "phase": "Foundation",
-      "paper": "EndGame",
-      "system": "Dorsal premotor cortex",
-      "id": "E010"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "EndGame",
-      "system": "SMA / pre-SMA",
-      "id": "E011"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "EndGame",
-      "system": "Motor cortex",
-      "id": "E012"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "EndGame",
-      "system": "Posterior parietal cortex",
-      "id": "E013"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "EndGame",
-      "system": "Basal ganglia / striatum",
-      "id": "E014"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "EndGame",
-      "system": "Cerebellum",
-      "id": "E015"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "EndGame",
-      "system": "Premotor cortex",
-      "id": "E016"
-    },
-    {
-      "phase": "Foundation",
       "paper": "How Long Is a Thought?",
       "system": "Hippocampus / medial temporal lobe",
       "id": "E017"
@@ -716,126 +746,6 @@
       "paper": "How Long Is a Thought?",
       "system": "Prospective-memory / timing systems",
       "id": "E023"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Layer-5 pyramidal neurons",
-      "id": "E024"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Apical dendrites",
-      "id": "E025"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Higher-order thalamus",
-      "id": "E026"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Thalamocortical circuits",
-      "id": "E027"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Association cortex",
-      "id": "E028"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Sensory cortex / sensory systems",
-      "id": "E029"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Hippocampus / medial temporal lobe",
-      "id": "E030"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Neuromodulatory systems",
-      "id": "E031"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Valuation systems",
-      "id": "E032"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Interoceptive systems",
-      "id": "E033"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Gene-regulatory / plasticity systems",
-      "id": "E034"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Icarus",
-      "system": "Thalamus",
-      "id": "E035"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "DLPFC",
-      "id": "E036"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "aPFC / frontopolar cortex",
-      "id": "E037"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "vmPFC / OFC",
-      "id": "E038"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "dACC / midcingulate cortex",
-      "id": "E039"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "Basal ganglia / striatum",
-      "id": "E040"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "SMA / pre-SMA",
-      "id": "E041"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "Frontoparietal control network",
-      "id": "E042"
-    },
-    {
-      "phase": "Foundation",
-      "paper": "Squirrel",
-      "system": "Valuation systems",
-      "id": "E043"
     },
     {
       "phase": "Foundation",
@@ -904,196 +814,160 @@
       "id": "E054"
     },
     {
-      "phase": "Foundation",
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Layer-5 pyramidal neurons",
+      "id": "E024"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Apical dendrites",
+      "id": "E025"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Higher-order thalamus",
+      "id": "E026"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Thalamocortical circuits",
+      "id": "E027"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Association cortex",
+      "id": "E028"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Sensory cortex / sensory systems",
+      "id": "E029"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E030"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Neuromodulatory systems",
+      "id": "E031"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Valuation systems",
+      "id": "E032"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Interoceptive systems",
+      "id": "E033"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Gene-regulatory / plasticity systems",
+      "id": "E034"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Icarus",
+      "system": "Thalamus",
+      "id": "E035"
+    },
+    {
+      "phase": "Construction",
       "paper": "You Are Here",
       "system": "DLPFC",
       "id": "E055"
     },
     {
-      "phase": "Foundation",
+      "phase": "Construction",
       "paper": "You Are Here",
       "system": "aPFC / frontopolar cortex",
       "id": "E056"
     },
     {
-      "phase": "Foundation",
+      "phase": "Construction",
       "paper": "You Are Here",
       "system": "Posterior parietal cortex",
       "id": "E057"
     },
     {
-      "phase": "Foundation",
+      "phase": "Construction",
       "paper": "You Are Here",
       "system": "dACC / midcingulate cortex",
       "id": "E058"
     },
     {
-      "phase": "Foundation",
+      "phase": "Construction",
       "paper": "You Are Here",
       "system": "Anterior insula",
       "id": "E059"
     },
     {
-      "phase": "Foundation",
+      "phase": "Construction",
       "paper": "You Are Here",
       "system": "Frontoparietal control network",
       "id": "E060"
     },
     {
       "phase": "Construction",
-      "paper": "Relevance",
-      "system": "Hippocampus / medial temporal lobe",
-      "id": "E061"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Relevance",
-      "system": "Prefrontal cortex, general",
-      "id": "E062"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Relevance",
-      "system": "aPFC / frontopolar cortex",
-      "id": "E063"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Relevance",
-      "system": "Basal ganglia / striatum",
-      "id": "E064"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Relevance",
-      "system": "Prospective-memory / timing systems",
-      "id": "E065"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Push",
+      "paper": "Squirrel",
       "system": "DLPFC",
-      "id": "E066"
+      "id": "E036"
     },
     {
       "phase": "Construction",
-      "paper": "Push",
+      "paper": "Squirrel",
       "system": "aPFC / frontopolar cortex",
-      "id": "E067"
+      "id": "E037"
     },
     {
       "phase": "Construction",
-      "paper": "Push",
-      "system": "Posterior parietal cortex",
-      "id": "E068"
+      "paper": "Squirrel",
+      "system": "vmPFC / OFC",
+      "id": "E038"
     },
     {
       "phase": "Construction",
-      "paper": "Push",
+      "paper": "Squirrel",
       "system": "dACC / midcingulate cortex",
-      "id": "E069"
+      "id": "E039"
     },
     {
       "phase": "Construction",
-      "paper": "Push",
-      "system": "Anterior insula",
-      "id": "E070"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Push",
-      "system": "Frontostriatal systems",
-      "id": "E071"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "Hippocampus / medial temporal lobe",
-      "id": "E072"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "Medial prefrontal cortex",
-      "id": "E073"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "PCC / precuneus",
-      "id": "E074"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "Angular gyrus",
-      "id": "E075"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "Default mode network",
-      "id": "E076"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "Lateral / anterior prefrontal cortex",
-      "id": "E077"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "aPFC / frontopolar cortex",
-      "id": "E078"
-    },
-    {
-      "phase": "Construction",
-      "paper": "Pull",
-      "system": "Valuation systems",
-      "id": "E079"
-    },
-    {
-      "phase": "Construction",
-      "paper": "PhoneWalletKeys",
-      "system": "Hippocampus / medial temporal lobe",
-      "id": "E080"
-    },
-    {
-      "phase": "Construction",
-      "paper": "PhoneWalletKeys",
-      "system": "Prefrontal cortex, general",
-      "id": "E081"
-    },
-    {
-      "phase": "Construction",
-      "paper": "PhoneWalletKeys",
-      "system": "DLPFC",
-      "id": "E082"
-    },
-    {
-      "phase": "Construction",
-      "paper": "PhoneWalletKeys",
-      "system": "Caudate",
-      "id": "E083"
-    },
-    {
-      "phase": "Construction",
-      "paper": "PhoneWalletKeys",
+      "paper": "Squirrel",
       "system": "Basal ganglia / striatum",
-      "id": "E084"
+      "id": "E040"
     },
     {
       "phase": "Construction",
-      "paper": "PhoneWalletKeys",
-      "system": "Premotor cortex",
-      "id": "E085"
-    },
-    {
-      "phase": "Construction",
-      "paper": "PhoneWalletKeys",
+      "paper": "Squirrel",
       "system": "SMA / pre-SMA",
-      "id": "E086"
+      "id": "E041"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Squirrel",
+      "system": "Frontoparietal control network",
+      "id": "E042"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Squirrel",
+      "system": "Valuation systems",
+      "id": "E043"
     },
     {
       "phase": "Construction",
@@ -1163,6 +1037,96 @@
     },
     {
       "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E080"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Prefrontal cortex, general",
+      "id": "E081"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "DLPFC",
+      "id": "E082"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Caudate",
+      "id": "E083"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Basal ganglia / striatum",
+      "id": "E084"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Premotor cortex",
+      "id": "E085"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "SMA / pre-SMA",
+      "id": "E086"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E072"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Medial prefrontal cortex",
+      "id": "E073"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "PCC / precuneus",
+      "id": "E074"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Angular gyrus",
+      "id": "E075"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Default mode network",
+      "id": "E076"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Lateral / anterior prefrontal cortex",
+      "id": "E077"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E078"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Valuation systems",
+      "id": "E079"
+    },
+    {
+      "phase": "Construction",
       "paper": "Weight",
       "system": "vmPFC / OFC",
       "id": "E098"
@@ -1226,6 +1190,42 @@
       "paper": "Weight",
       "system": "Valuation systems",
       "id": "E108"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "DLPFC",
+      "id": "E066"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E067"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "Posterior parietal cortex",
+      "id": "E068"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "dACC / midcingulate cortex",
+      "id": "E069"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "Anterior insula",
+      "id": "E070"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "Frontostriatal systems",
+      "id": "E071"
     },
     {
       "phase": "Action",

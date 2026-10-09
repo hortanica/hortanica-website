@@ -16,8 +16,7 @@ XML = {'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
        'r':'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
        'p':'http://schemas.openxmlformats.org/package/2006/relationships'}
 
-# Existing URLs must remain stable. New/unpublished manuscripts use the prototype
-# detail view until their dedicated page is prepared.
+# Stable canonical URLs for all 16 paper detail pages.
 PAPER_URLS = {
  'Boundary Theory':'/research/boundary-relative-state-time/',
  'Containment':'/research/grey-matter-containment/',
@@ -33,7 +32,8 @@ PAPER_URLS = {
  'PhoneWalletKeys':'/research/action-specific-history/',
  'FuckYourFeelings':'/research/emotional-reality-before-explanation/',
  'Weight':'/research/weight-same-words-different-consequence/',
- 'WhatchyaDoin':'/research/DHE_map/papers/whatchyadoin/'
+ 'WhatchyaDoin':'/research/whatchyadoin/',
+ 'FutureYou':'/research/futureyou/'
 }
 COLORS = {'Foundation':'#2F80ED', 'Construction':'#18B982',
           'Action':'#F2994A','Integration':'#9B51E0'}
