@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research System Map — Hortanica</title>
+  <meta name="description" content="Explore connections between Hortanica research phases, papers, and brain/body systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="stylesheet" href="map.css">
+  <script src="map.js" defer></script>
+</head>
+<body>
+  <header class="masthead"><div class="wrap"><a class="wordmark" href="../../">HORTANICA</a><div class="rule"></div><nav aria-label="Primary"><a href="../../">Home</a><a class="active" href="../">Research</a><a href="../../projects/">Projects</a><a href="../../about/">About</a></nav><div class="rule"></div></div></header>
+  <main class="map-page">
+    <header class="map-heading">
+      <a class="back-link" href="../">← Research</a>
+      <p class="kicker">Decomposing the Human Experience</p>
+      <h1>Research System Map</h1>
+      <p class="map-lede">Explore which brain and body systems are associated with each research paper, and how those papers fit within this program's four analytical phases.</p>
+      <p class="map-disclaimer">This map records implicated systems in the current research portfolio. A connection is not a claim of unique anatomical localization or demonstrated causal attribution.</p>
+    </header>
+    <div class="map-tools" aria-label="Map tools">
+      <label class="map-search-label" for="map-search">Find a phase, paper, or system</label>
+      <div class="map-search-row"><input id="map-search" type="search" placeholder="Search the map…" autocomplete="off"><button id="map-reset" type="button">Clear</button></div>
+      <p class="map-totals" id="map-counts" aria-live="polite">Loading portfolio data…</p>
+    </div>
+    <section class="diagram-shell" aria-label="Interactive phase, paper, and system connections">
+      <div class="diagram-guide">
+        <span>Hover or focus an item to highlight its connections.</span>
+        <a href="systems/">Browse all systems →</a>
+      </div>
+      <div class="diagram-canvas" id="diagram-canvas" role="region" aria-label="Research relationship map"><p>Loading interactive map…</p></div>
+      <p class="diagram-feedback" id="diagram-feedback" aria-live="polite">Every label is a link to its corresponding page.</p>
+    </section>
+    <section class="mobile-explorer" aria-label="Mobile research map">
+      <h2>Explore by phase</h2>
+      <p>Select a paper to see its connected systems, or open the paper page directly.</p>
+      <div id="mobile-phases"></div>
+      <div class="mobile-system-directory">
+        <h2>Explore by system</h2>
+        <p>Open a system page to find all associated papers.</p>
+        <div id="mobile-systems"></div>
+      </div>
+    </section>
+    <p class="data-note">Map generated from <code>Research_Portfolio_System_Map.xlsx</code>. The Excel workbook is the master; this page reads the generated JSON data. <a href="research-map.json">View current map data</a>.</p>
+  </main>
+  <footer class="site-footer"><div class="wrap"><div class="rule"></div><p>Hortanica · Michael J. Horton Jr. · 2026</p></div></footer>
+</body>
+</html>

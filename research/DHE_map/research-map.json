@@ -1,0 +1,1321 @@
+{
+  "schemaVersion": 1,
+  "source": "Research_Portfolio_System_Map.xlsx",
+  "note": "Mapped associations, not unique anatomical localization or demonstrated causal attribution.",
+  "counts": {
+    "phases": 4,
+    "papers": 16,
+    "systems": 46,
+    "connections": 134
+  },
+  "phases": [
+    {
+      "name": "Foundation",
+      "slug": "foundation",
+      "order": 1,
+      "color": "#2F80ED",
+      "url": "/research/foundation/",
+      "paperCount": 8
+    },
+    {
+      "name": "Construction",
+      "slug": "construction",
+      "order": 2,
+      "color": "#18B982",
+      "url": "/research/construction/",
+      "paperCount": 6
+    },
+    {
+      "name": "Action",
+      "slug": "action",
+      "order": 3,
+      "color": "#F2994A",
+      "url": "/research/action/",
+      "paperCount": 1
+    },
+    {
+      "name": "Integration",
+      "slug": "integration",
+      "order": 4,
+      "color": "#9B51E0",
+      "url": "/research/integration/",
+      "paperCount": 1
+    }
+  ],
+  "papers": [
+    {
+      "name": "Boundary Theory",
+      "slug": "boundary-theory",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 1,
+      "url": "/research/boundary-relative-state-time/",
+      "detailPending": false
+    },
+    {
+      "name": "Containment",
+      "slug": "containment",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 2,
+      "url": "/research/grey-matter-containment/",
+      "detailPending": false
+    },
+    {
+      "name": "EndGame",
+      "slug": "endgame",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 3,
+      "url": "/research/representation-to-realization/",
+      "detailPending": false
+    },
+    {
+      "name": "How Long Is a Thought?",
+      "slug": "how-long-is-a-thought",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 4,
+      "url": "/research/how-long-is-a-thought/",
+      "detailPending": false
+    },
+    {
+      "name": "Icarus",
+      "slug": "icarus",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 5,
+      "url": "/research/constrained-realization/",
+      "detailPending": false
+    },
+    {
+      "name": "Squirrel",
+      "slug": "squirrel",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 6,
+      "url": "/research/task-initiation-failure/",
+      "detailPending": false
+    },
+    {
+      "name": "Time",
+      "slug": "time",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 7,
+      "url": "/research/boundary-relative-temporal-experience/",
+      "detailPending": false
+    },
+    {
+      "name": "You Are Here",
+      "slug": "you-are-here",
+      "phase": "Foundation",
+      "phaseOrder": 1,
+      "order": 8,
+      "url": "/research/bottleneck-relative-phenomenal-content/",
+      "detailPending": false
+    },
+    {
+      "name": "Relevance",
+      "slug": "relevance",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 9,
+      "url": "/research/historical-relevance-audit/",
+      "detailPending": false
+    },
+    {
+      "name": "Push",
+      "slug": "push",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 10,
+      "url": "/research/knowledge-handoffs-under-change/",
+      "detailPending": false
+    },
+    {
+      "name": "Pull",
+      "slug": "pull",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 11,
+      "url": "/research/when-an-alternative-becomes-possible/",
+      "detailPending": false
+    },
+    {
+      "name": "PhoneWalletKeys",
+      "slug": "phonewalletkeys",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 12,
+      "url": "/research/action-specific-history/",
+      "detailPending": false
+    },
+    {
+      "name": "FuckYourFeelings",
+      "slug": "fuckyourfeelings",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 13,
+      "url": "/research/emotional-reality-before-explanation/",
+      "detailPending": false
+    },
+    {
+      "name": "Weight",
+      "slug": "weight",
+      "phase": "Construction",
+      "phaseOrder": 2,
+      "order": 14,
+      "url": "/research/weight-same-words-different-consequence/",
+      "detailPending": false
+    },
+    {
+      "name": "WhatchyaDoin",
+      "slug": "whatchyadoin",
+      "phase": "Action",
+      "phaseOrder": 3,
+      "order": 15,
+      "url": "/research/DHE_map/papers/whatchyadoin/",
+      "detailPending": false
+    },
+    {
+      "name": "FutureYou",
+      "slug": "futureyou",
+      "phase": "Integration",
+      "phaseOrder": 4,
+      "order": 16,
+      "url": "/research/DHE_map/papers/?paper=futureyou",
+      "detailPending": true
+    }
+  ],
+  "systems": [
+    {
+      "name": "Basal ganglia / striatum",
+      "slug": "basal-ganglia-striatum",
+      "count": 9,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=basal-ganglia-striatum"
+    },
+    {
+      "name": "Hippocampus / medial temporal lobe",
+      "slug": "hippocampus-medial-temporal-lobe",
+      "count": 8,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=hippocampus-medial-temporal-lobe"
+    },
+    {
+      "name": "dACC / midcingulate cortex",
+      "slug": "dacc-midcingulate-cortex",
+      "count": 7,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=dacc-midcingulate-cortex"
+    },
+    {
+      "name": "Anterior insula",
+      "slug": "anterior-insula",
+      "count": 6,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=anterior-insula"
+    },
+    {
+      "name": "aPFC / frontopolar cortex",
+      "slug": "apfc-frontopolar-cortex",
+      "count": 6,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=apfc-frontopolar-cortex"
+    },
+    {
+      "name": "SMA / pre-SMA",
+      "slug": "sma-pre-sma",
+      "count": 6,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=sma-pre-sma"
+    },
+    {
+      "name": "Valuation systems",
+      "slug": "valuation-systems",
+      "count": 6,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=valuation-systems"
+    },
+    {
+      "name": "DLPFC",
+      "slug": "dlpfc",
+      "count": 5,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=dlpfc"
+    },
+    {
+      "name": "Interoceptive systems",
+      "slug": "interoceptive-systems",
+      "count": 5,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=interoceptive-systems"
+    },
+    {
+      "name": "Posterior parietal cortex",
+      "slug": "posterior-parietal-cortex",
+      "count": 5,
+      "coverage": "High",
+      "url": "/research/DHE_map/systems/?system=posterior-parietal-cortex"
+    },
+    {
+      "name": "Autonomic / arousal systems",
+      "slug": "autonomic-arousal-systems",
+      "count": 4,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=autonomic-arousal-systems"
+    },
+    {
+      "name": "Default mode network",
+      "slug": "default-mode-network",
+      "count": 4,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=default-mode-network"
+    },
+    {
+      "name": "Frontoparietal control network",
+      "slug": "frontoparietal-control-network",
+      "count": 4,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=frontoparietal-control-network"
+    },
+    {
+      "name": "Prefrontal cortex, general",
+      "slug": "prefrontal-cortex-general",
+      "count": 4,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=prefrontal-cortex-general"
+    },
+    {
+      "name": "Sensory cortex / sensory systems",
+      "slug": "sensory-cortex-sensory-systems",
+      "count": 4,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=sensory-cortex-sensory-systems"
+    },
+    {
+      "name": "Thalamus",
+      "slug": "thalamus",
+      "count": 4,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=thalamus"
+    },
+    {
+      "name": "vmPFC / OFC",
+      "slug": "vmpfc-ofc",
+      "count": 4,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=vmpfc-ofc"
+    },
+    {
+      "name": "Cerebellum",
+      "slug": "cerebellum",
+      "count": 3,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=cerebellum"
+    },
+    {
+      "name": "Medial prefrontal cortex",
+      "slug": "medial-prefrontal-cortex",
+      "count": 3,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=medial-prefrontal-cortex"
+    },
+    {
+      "name": "Posterior / mid insula",
+      "slug": "posterior-mid-insula",
+      "count": 3,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=posterior-mid-insula"
+    },
+    {
+      "name": "Premotor cortex",
+      "slug": "premotor-cortex",
+      "count": 3,
+      "coverage": "Medium",
+      "url": "/research/DHE_map/systems/?system=premotor-cortex"
+    },
+    {
+      "name": "ACC",
+      "slug": "acc",
+      "count": 2,
+      "coverage": "Low",
+      "url": "/research/DHE_map/systems/?system=acc"
+    },
+    {
+      "name": "Dorsal premotor cortex",
+      "slug": "dorsal-premotor-cortex",
+      "count": 2,
+      "coverage": "Low",
+      "url": "/research/DHE_map/systems/?system=dorsal-premotor-cortex"
+    },
+    {
+      "name": "Frontoparietal attention network",
+      "slug": "frontoparietal-attention-network",
+      "count": 2,
+      "coverage": "Low",
+      "url": "/research/DHE_map/systems/?system=frontoparietal-attention-network"
+    },
+    {
+      "name": "Neuromodulatory systems",
+      "slug": "neuromodulatory-systems",
+      "count": 2,
+      "coverage": "Low",
+      "url": "/research/DHE_map/systems/?system=neuromodulatory-systems"
+    },
+    {
+      "name": "Prospective-memory / timing systems",
+      "slug": "prospective-memory-timing-systems",
+      "count": 2,
+      "coverage": "Low",
+      "url": "/research/DHE_map/systems/?system=prospective-memory-timing-systems"
+    },
+    {
+      "name": "TPJ / pSTS",
+      "slug": "tpj-psts",
+      "count": 2,
+      "coverage": "Low",
+      "url": "/research/DHE_map/systems/?system=tpj-psts"
+    },
+    {
+      "name": "Amygdala",
+      "slug": "amygdala",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=amygdala"
+    },
+    {
+      "name": "Angular gyrus",
+      "slug": "angular-gyrus",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=angular-gyrus"
+    },
+    {
+      "name": "Apical dendrites",
+      "slug": "apical-dendrites",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=apical-dendrites"
+    },
+    {
+      "name": "Association cortex",
+      "slug": "association-cortex",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=association-cortex"
+    },
+    {
+      "name": "Brainstem",
+      "slug": "brainstem",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=brainstem"
+    },
+    {
+      "name": "Cardiac systems",
+      "slug": "cardiac-systems",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=cardiac-systems"
+    },
+    {
+      "name": "Caudate",
+      "slug": "caudate",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=caudate"
+    },
+    {
+      "name": "Frontostriatal systems",
+      "slug": "frontostriatal-systems",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=frontostriatal-systems"
+    },
+    {
+      "name": "Gene-regulatory / plasticity systems",
+      "slug": "gene-regulatory-plasticity-systems",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=gene-regulatory-plasticity-systems"
+    },
+    {
+      "name": "Higher-order thalamus",
+      "slug": "higher-order-thalamus",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=higher-order-thalamus"
+    },
+    {
+      "name": "Hypothalamus",
+      "slug": "hypothalamus",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=hypothalamus"
+    },
+    {
+      "name": "Lateral / anterior prefrontal cortex",
+      "slug": "lateral-anterior-prefrontal-cortex",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=lateral-anterior-prefrontal-cortex"
+    },
+    {
+      "name": "Layer-5 pyramidal neurons",
+      "slug": "layer-5-pyramidal-neurons",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=layer-5-pyramidal-neurons"
+    },
+    {
+      "name": "Locus coeruleus / noradrenergic system",
+      "slug": "locus-coeruleus-noradrenergic-system",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=locus-coeruleus-noradrenergic-system"
+    },
+    {
+      "name": "Motor cortex",
+      "slug": "motor-cortex",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=motor-cortex"
+    },
+    {
+      "name": "PCC / precuneus",
+      "slug": "pcc-precuneus",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=pcc-precuneus"
+    },
+    {
+      "name": "Substantia nigra dopaminergic system",
+      "slug": "substantia-nigra-dopaminergic-system",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=substantia-nigra-dopaminergic-system"
+    },
+    {
+      "name": "Thalamocortical circuits",
+      "slug": "thalamocortical-circuits",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=thalamocortical-circuits"
+    },
+    {
+      "name": "Ventral striatum",
+      "slug": "ventral-striatum",
+      "count": 1,
+      "coverage": "Singleton",
+      "url": "/research/DHE_map/systems/?system=ventral-striatum"
+    }
+  ],
+  "edges": [
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Anterior insula",
+      "id": "E001"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Posterior / mid insula",
+      "id": "E002"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "dACC / midcingulate cortex",
+      "id": "E003"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Autonomic / arousal systems",
+      "id": "E004"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Frontoparietal control network",
+      "id": "E005"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Default mode network",
+      "id": "E006"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Thalamus",
+      "id": "E007"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Sensory cortex / sensory systems",
+      "id": "E008"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Containment",
+      "system": "Interoceptive systems",
+      "id": "E009"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Dorsal premotor cortex",
+      "id": "E010"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "SMA / pre-SMA",
+      "id": "E011"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Motor cortex",
+      "id": "E012"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Posterior parietal cortex",
+      "id": "E013"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Basal ganglia / striatum",
+      "id": "E014"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Cerebellum",
+      "id": "E015"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "EndGame",
+      "system": "Premotor cortex",
+      "id": "E016"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "How Long Is a Thought?",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E017"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "How Long Is a Thought?",
+      "system": "Prefrontal cortex, general",
+      "id": "E018"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "How Long Is a Thought?",
+      "system": "Frontoparietal attention network",
+      "id": "E019"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "How Long Is a Thought?",
+      "system": "Basal ganglia / striatum",
+      "id": "E020"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "How Long Is a Thought?",
+      "system": "SMA / pre-SMA",
+      "id": "E021"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "How Long Is a Thought?",
+      "system": "Cerebellum",
+      "id": "E022"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "How Long Is a Thought?",
+      "system": "Prospective-memory / timing systems",
+      "id": "E023"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Layer-5 pyramidal neurons",
+      "id": "E024"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Apical dendrites",
+      "id": "E025"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Higher-order thalamus",
+      "id": "E026"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Thalamocortical circuits",
+      "id": "E027"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Association cortex",
+      "id": "E028"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Sensory cortex / sensory systems",
+      "id": "E029"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E030"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Neuromodulatory systems",
+      "id": "E031"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Valuation systems",
+      "id": "E032"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Interoceptive systems",
+      "id": "E033"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Gene-regulatory / plasticity systems",
+      "id": "E034"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Icarus",
+      "system": "Thalamus",
+      "id": "E035"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "DLPFC",
+      "id": "E036"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E037"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "vmPFC / OFC",
+      "id": "E038"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "dACC / midcingulate cortex",
+      "id": "E039"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "Basal ganglia / striatum",
+      "id": "E040"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "SMA / pre-SMA",
+      "id": "E041"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "Frontoparietal control network",
+      "id": "E042"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Squirrel",
+      "system": "Valuation systems",
+      "id": "E043"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Anterior insula",
+      "id": "E044"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Posterior / mid insula",
+      "id": "E045"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "ACC",
+      "id": "E046"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E047"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Prefrontal cortex, general",
+      "id": "E048"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "SMA / pre-SMA",
+      "id": "E049"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Basal ganglia / striatum",
+      "id": "E050"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Cerebellum",
+      "id": "E051"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Cardiac systems",
+      "id": "E052"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Interoceptive systems",
+      "id": "E053"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "Time",
+      "system": "Autonomic / arousal systems",
+      "id": "E054"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "You Are Here",
+      "system": "DLPFC",
+      "id": "E055"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "You Are Here",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E056"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "You Are Here",
+      "system": "Posterior parietal cortex",
+      "id": "E057"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "You Are Here",
+      "system": "dACC / midcingulate cortex",
+      "id": "E058"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "You Are Here",
+      "system": "Anterior insula",
+      "id": "E059"
+    },
+    {
+      "phase": "Foundation",
+      "paper": "You Are Here",
+      "system": "Frontoparietal control network",
+      "id": "E060"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Relevance",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E061"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Relevance",
+      "system": "Prefrontal cortex, general",
+      "id": "E062"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Relevance",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E063"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Relevance",
+      "system": "Basal ganglia / striatum",
+      "id": "E064"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Relevance",
+      "system": "Prospective-memory / timing systems",
+      "id": "E065"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "DLPFC",
+      "id": "E066"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E067"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "Posterior parietal cortex",
+      "id": "E068"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "dACC / midcingulate cortex",
+      "id": "E069"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "Anterior insula",
+      "id": "E070"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Push",
+      "system": "Frontostriatal systems",
+      "id": "E071"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E072"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Medial prefrontal cortex",
+      "id": "E073"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "PCC / precuneus",
+      "id": "E074"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Angular gyrus",
+      "id": "E075"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Default mode network",
+      "id": "E076"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Lateral / anterior prefrontal cortex",
+      "id": "E077"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E078"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Pull",
+      "system": "Valuation systems",
+      "id": "E079"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E080"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Prefrontal cortex, general",
+      "id": "E081"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "DLPFC",
+      "id": "E082"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Caudate",
+      "id": "E083"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Basal ganglia / striatum",
+      "id": "E084"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "Premotor cortex",
+      "id": "E085"
+    },
+    {
+      "phase": "Construction",
+      "paper": "PhoneWalletKeys",
+      "system": "SMA / pre-SMA",
+      "id": "E086"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Brainstem",
+      "id": "E087"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Hypothalamus",
+      "id": "E088"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Thalamus",
+      "id": "E089"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Posterior / mid insula",
+      "id": "E090"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Anterior insula",
+      "id": "E091"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "ACC",
+      "id": "E092"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Amygdala",
+      "id": "E093"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "vmPFC / OFC",
+      "id": "E094"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Autonomic / arousal systems",
+      "id": "E095"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Interoceptive systems",
+      "id": "E096"
+    },
+    {
+      "phase": "Construction",
+      "paper": "FuckYourFeelings",
+      "system": "Valuation systems",
+      "id": "E097"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "vmPFC / OFC",
+      "id": "E098"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Ventral striatum",
+      "id": "E099"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Anterior insula",
+      "id": "E100"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "dACC / midcingulate cortex",
+      "id": "E101"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E102"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Default mode network",
+      "id": "E103"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Medial prefrontal cortex",
+      "id": "E104"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "TPJ / pSTS",
+      "id": "E105"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Autonomic / arousal systems",
+      "id": "E106"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Basal ganglia / striatum",
+      "id": "E107"
+    },
+    {
+      "phase": "Construction",
+      "paper": "Weight",
+      "system": "Valuation systems",
+      "id": "E108"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Basal ganglia / striatum",
+      "id": "E109"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "SMA / pre-SMA",
+      "id": "E110"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Dorsal premotor cortex",
+      "id": "E111"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Premotor cortex",
+      "id": "E112"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Posterior parietal cortex",
+      "id": "E113"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "dACC / midcingulate cortex",
+      "id": "E114"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Sensory cortex / sensory systems",
+      "id": "E115"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Neuromodulatory systems",
+      "id": "E116"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Substantia nigra dopaminergic system",
+      "id": "E117"
+    },
+    {
+      "phase": "Action",
+      "paper": "WhatchyaDoin",
+      "system": "Locus coeruleus / noradrenergic system",
+      "id": "E118"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Hippocampus / medial temporal lobe",
+      "id": "E119"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "aPFC / frontopolar cortex",
+      "id": "E120"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "dACC / midcingulate cortex",
+      "id": "E121"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "DLPFC",
+      "id": "E122"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "vmPFC / OFC",
+      "id": "E123"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Basal ganglia / striatum",
+      "id": "E124"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Valuation systems",
+      "id": "E125"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Posterior parietal cortex",
+      "id": "E126"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "TPJ / pSTS",
+      "id": "E127"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Medial prefrontal cortex",
+      "id": "E128"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Default mode network",
+      "id": "E129"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Frontoparietal attention network",
+      "id": "E130"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Frontoparietal control network",
+      "id": "E131"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Sensory cortex / sensory systems",
+      "id": "E132"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Interoceptive systems",
+      "id": "E133"
+    },
+    {
+      "phase": "Integration",
+      "paper": "FutureYou",
+      "system": "Thalamus",
+      "id": "E134"
+    }
+  ]
+}
