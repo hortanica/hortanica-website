@@ -18,3 +18,18 @@
 .system-list a:hover,.system-list a:focus-visible { color:var(--green);text-decoration:underline; }
 .system-list input { font: inherit; font-size:16px; width:100%; padding:10px; border:1px solid var(--rule);margin-bottom:20px; }
 @media(max-width:640px){ .system-page{padding:46px 0 75px;} }
+/* Descriptions are intentionally more prominent than counts. */
+.system-panel > input[type=search] { font:inherit;font-size:16px;width:100%;max-width:620px;padding:11px;border:1px solid var(--rule);margin-bottom:18px; }
+.system-list .system-entry {display:block;text-decoration:none;padding:15px 5px 16px;border-bottom:1px solid #d0cec7;}
+.system-entry-top {display:flex;align-items:baseline;justify-content:space-between;gap:16px;}
+.system-entry-top strong {font-weight:700;font-size:1.02rem;color:var(--green);}
+.system-entry-top .system-paper-count {font-size:.82rem;color:var(--muted);white-space:nowrap;}
+.system-list .system-description {display:block;margin-top:5px;color:var(--muted);font-size:.9rem;line-height:1.52;font-style:italic;}
+.system-list .system-entry:hover .system-entry-top strong,.system-list .system-entry:focus-visible .system-entry-top strong {text-decoration:underline;}
+.system-detail-count {font-size:.86rem;color:var(--muted);margin:0 0 16px;}
+.system-phase .system-phase-tagline {font-style:italic;color:var(--muted);margin:0 0 15px;}
+.system-phase a.paper-result {display:block;text-decoration:none;}
+.system-phase a.paper-result:hover strong,.system-phase a.paper-result:focus-visible strong {text-decoration:underline;}
+.system-phase .paper-question {display:block;color:var(--muted);font-style:italic;font-size:.92rem;margin-top:5px;line-height:1.45;}
+.system-phase li {padding:10px 0 13px;border-bottom:1px solid #e6e2da;}
+.system-entry[hidden] {display:none;}

@@ -94,6 +94,22 @@ def build(xlsx):
     sheets=excel_sheets(xlsx)
     for name in ('Papers','Systems','Connections'):
         if name not in sheets: raise ValueError(f'Missing sheet: {name}')
+    def descriptions(sheet_name, expected_header):
+        if sheet_name not in sheets:
+            raise ValueError(f'Missing workbook description sheet: {sheet_name}')
+        rows = sheets[sheet_name]
+        if rows[0][:2] != expected_header:
+            raise ValueError(f'Unexpected headers in {sheet_name}: {rows[0][:2]}')
+        result={}
+        for row in rows[1:]:
+            key, content=value(row,0),value(row,1)
+            if not key: continue
+            if key in result: raise ValueError(f'Duplicate metadata name: {key}')
+            result[key]=content
+        return result
+    phase_descriptions=descriptions('Phase Descriptions',['Phase','Human-centered subtitle'])
+    paper_descriptions=descriptions('Paper Descriptions',['Paper','Short question or status'])
+    system_descriptions=descriptions('System Descriptions',['System','Human-centered description'])
     paper_rows=sheets['Papers']
     assert paper_rows[0][:2]==['Paper','Phase'], 'Unexpected Papers headers'
     papers=[]
@@ -109,11 +125,13 @@ def build(xlsx):
         url=PAPER_URLS.get(name, f'/research/DHE_map/papers/?paper={slug}')
         papers.append({'name':name,'slug':slug,'phase':phase,
                        'phaseOrder':int(value(row,2)), 'order':int(value(row,3)),
-                       'url':url, 'detailPending':name not in PAPER_URLS})
+                       'url':url, 'detailPending':name not in PAPER_URLS,
+                       'description':paper_descriptions.get(name,'Description pending.')})
         phase_count[phase]+=1
     papers.sort(key=lambda p:(p['phaseOrder'],p['order']))
     phase_rows=[{'name':phase, 'slug':phase.lower(), 'order':i+1, 'color':COLORS[phase],
-                 'url':f'/research/{phase.lower()}/', 'paperCount':phase_count[phase]}
+                 'url':f'/research/{phase.lower()}/', 'paperCount':phase_count[phase],
+                 'description':phase_descriptions.get(phase,'')}
                 for i,phase in enumerate(COLORS)]
     systems=[]
     sys_names=set()
@@ -124,9 +142,14 @@ def build(xlsx):
         sys_names.add(name)
         slug=slugify(name)
         systems.append({'name':name,'slug':slug,'count':int(value(row,1)),
-                        'coverage':value(row,2),
+                        'coverage':value(row,2), 'description':system_descriptions.get(name,''),
                         'url':f'/research/DHE_map/systems/?system={slug}'})
     if len({s['slug'] for s in systems})!=len(systems): raise ValueError('System slug collision')
+    for title,lookup,names in [('Phase',phase_descriptions,set(COLORS)),('Paper',paper_descriptions,paper_names),('System',system_descriptions,sys_names)]:
+        for unknown in set(lookup)-names:
+            raise ValueError(f'Orphan description in {title}: {unknown}')
+        for missing in names-set(lookup):
+            print(f'Note: {title} description pending for {missing}')
     edges=[]
     unique=set()
     for row in sheets['Connections'][1:]:
@@ -148,7 +171,7 @@ def build(xlsx):
         expected=int(value(row,4))
         if counts[p['name']]!=expected:
             raise ValueError(f'Paper count mismatch: {p["name"]} ({counts[p["name"]]} != {expected})')
-    return {'schemaVersion':1, 'source':'Research_Portfolio_System_Map.xlsx',
+    return {'schemaVersion':2, 'source':'Research_Portfolio_System_Map.xlsx',
             'note':'Mapped associations, not unique anatomical localization or demonstrated causal attribution.',
             'counts':{'phases':len(phase_rows),'papers':len(papers),'systems':len(systems),'connections':len(edges)},
             'phases':phase_rows,'papers':papers,'systems':systems,'edges':edges}

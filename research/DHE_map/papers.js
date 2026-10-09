@@ -13,7 +13,7 @@
     title.textContent=paper.name;document.title=paper.name+' — Hortanica';
     const p=data.phases.find(p=>p.name===paper.phase);
     phase.textContent=`Phase ${String(p.order).padStart(2,'0')} — ${p.name}`;
-    summary.textContent='Manuscript ready for submission; not yet submitted. The full paper description and download links will be added when the manuscript is available for the website.';
+    summary.textContent=paper.description+' Manuscript preparation in progress; not submitted.';
     const panel=elem('section',undefined,'system-panel');panel.append(elem('h2','Systems mapped to this paper'));
     const items=data.edges.filter(e=>e.paper===paper.name).map(e=>data.systems.find(s=>s.name===e.system)).filter(Boolean);
     if(!items.length)panel.append(elem('p','No systems currently mapped.'));

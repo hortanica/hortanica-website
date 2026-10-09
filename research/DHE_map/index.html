@@ -29,19 +29,25 @@
     </div>
     <section class="diagram-shell" aria-label="Interactive phase, paper, and system connections">
       <div class="diagram-guide">
-        <span id="diagram-guide-text">Hover over a paper or system to isolate its connections.</span>
+        <span id="diagram-guide-text">Click a phase, paper, or system to explore its connections.</span>
         <div class="diagram-actions"><button type="button" id="map-show-all" hidden>← Show full map</button><a href="systems/">Browse all systems →</a></div>
       </div>
+      <div class="map-depth-row" id="map-depth-row" hidden>
+        <label for="map-depth">Connection depth <strong>— Layer 0 to 4</strong></label>
+        <input type="range" id="map-depth" min="0" max="4" value="0" step="1" list="depth-steps" aria-label="Connection depth, 0 to 4 additional layers">
+        <datalist id="depth-steps"><option value="0"></option><option value="1"></option><option value="2"></option><option value="3"></option><option value="4"></option></datalist>
+        <span id="map-depth-value" aria-live="polite">0 — Direct connections.</span>
+      </div>
       <div class="diagram-canvas" id="diagram-canvas" role="region" aria-label="Research relationship map"><p>Loading interactive map…</p></div>
-      <p class="diagram-feedback" id="diagram-feedback" aria-live="polite">Every label is a link to its corresponding page.</p>
+      <p class="diagram-feedback" id="diagram-feedback" aria-live="polite">Click once to filter. In the filtered view, click a label to open its page.</p>
     </section>
     <section class="mobile-explorer" aria-label="Mobile research map">
       <h2>Explore by phase</h2>
-      <p>Select a paper to see its connected systems, or open the paper page directly.</p>
+      <p>Each phase includes its papers, their research questions, and their mapped systems.</p>
       <div id="mobile-phases"></div>
       <div class="mobile-system-directory">
         <h2>Explore by system</h2>
-        <p>Open a system page to find all associated papers.</p>
+        <p>Read each system’s human-centered description, then open its page to explore associated papers.</p>
         <div id="mobile-systems"></div>
       </div>
     </section>

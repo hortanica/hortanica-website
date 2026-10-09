@@ -1,36 +1,47 @@
-# DHE Research System Map (prototype)
+# DHE Research System Map — interactive prototype
 
-Published URL after this folder is uploaded to the GitHub Pages repository:
+Public URL after uploading the folder to the website's GitHub Pages repository:
 `https://hortanica.com/research/DHE_map/`
 
-All prototype pages are self-contained in `research/DHE_map/`. Existing research/phase/paper pages are **not** changed.
+This self-contained prototype lives entirely under `research/DHE_map/`. Existing research/phase/paper pages are not changed.
 
-## Source of truth
+## Workbook is the master
 
-The primary workbook lives in OneDrive: `ChatGPT/Research_Portfolio_System_Map.xlsx`.
-`Research_Portfolio_System_Map.xlsx` in this folder is a GitHub mirror for publishing the map.
-The live webpage loads `research-map.json`, which is generated deterministically from the workbook's `Papers`, `Systems`, and `Connections` sheets.
+OneDrive master: `ChatGPT/Research_Portfolio_System_Map.xlsx`.
+The copy in this folder is for website deployment and should remain in sync with that master.
 
-To refresh data locally after copying the updated workbook into this directory:
+The workbook's **Papers**, **Systems**, and **Connections** sheets determine the phase/paper/system relationships. Three additional sheets hold the user-facing descriptions:
+
+- **Phase Descriptions** — phase subtitles from the existing Research overview.
+- **Paper Descriptions** — short questions from the existing Research phase pages for 14 established papers; WhatchyaDoin uses a short manuscript-based description; FutureYou is marked pending because its website manuscript is not yet available.
+- **System Descriptions** — the 46 reviewed, human-centered system descriptions.
+
+The website reads `research-map.json`, generated from the workbook. Regenerate after editing the Excel master:
 
 ```sh
 python research/DHE_map/build_map.py research/DHE_map/Research_Portfolio_System_Map.xlsx
 ```
 
-Commit the updated workbook and regenerated `research-map.json` to GitHub together. A GitHub Actions workflow can be added later to automate the regeneration whenever the workbook changes. No runtime server or database is required.
+Commit the updated workbook, generated JSON, and any modified HTML/CSS/JavaScript together. GitHub Actions automatic regeneration is not yet installed.
 
-## Links
+## Interactive diagram
 
-- Four phase nodes link to `/research/foundation/`, `/research/construction/`, `/research/action/`, and `/research/integration/`.
-- Fourteen existing research papers link to their established landing-page URLs.
-- `WhatchyaDoin` links to a manuscript-derived prototype paper page and is accurately marked **not submitted**. Its download links require the separate PDF files under `/papers/WhatchyaDoin/` on GitHub.
-- `FutureYou` currently opens a prototype-only holding page because its manuscript PDF has not yet appeared in the OneDrive website papers folder.
-- Every system links to `/research/DHE_map/systems/?system=<slug>`, a reusable page that lists its linked papers grouped by phase.
+**Desktop**: In the full map, click a phase, paper, or system to enter focused mode. Initial **Layer 0** shows direct paper–system connections. Adjust the **Connection depth** slider to Layers 1–4; each additional layer traverses one more paper-to-system or system-to-paper hop. Associated phases are always shown for visible papers.
 
-On desktop, pause the pointer over a **paper** or **system** for approximately 0.3 seconds to switch to a compact view of only its direct connections. Click any focused node to open its linked page. Use **Show full map** or **Escape** to return to the complete graph. Keyboard users may focus a paper/system link and press **Space** to open the compact connection view (Enter still follows the link).
+- In focused mode, click any phase, paper, or system **label to open its page**.
+- Click **outside a label and depth-control area** to remove the filter and return to the full diagram. **Show full map** and **Escape** also reset the filter.
+- Selecting a new starting node requires returning to the full map first, then clicking the new node.
+- Hovering may dim unrelated connections for inspection, but no longer triggers collapse.
+- With this densely connected portfolio, one or two extra layers may expose most of the network. Deep layers can exceed the window's height.
 
-On narrow screens, the graph is replaced with a phase/paper/system explorer because shrinking the 3-column diagram to mobile width makes the names illegible.
+**Mobile/narrow windows**: The diagram is replaced with the phase/paper/system text explorer. Phase numbers, phase subtitles, paper questions, and the 46 human-centered system descriptions remain visible without horizontal scrolling. The system directory includes searchable descriptions; selecting a system shows associated papers grouped by phase, with their research questions.
 
-## Data note
+## Links and status
 
-The system map records **implicated systems according to the workbook**, not uniquely identified anatomical mechanisms or experimentally demonstrated causal effects.
+- Phase links lead to the four established website phase pages. Note: the **workbook** has authoritative phase allocations and counts for this prototype, while the existing phase pages may still reflect older allocations.
+- Fourteen research papers link to their established landing pages.
+- WhatchyaDoin links to its manuscript-derived prototype page, marked **not submitted**.
+- FutureYou points to a holding page until its manuscript is available in the website paper folder.
+- All 46 system detail links use `research/DHE_map/systems/?system=<slug>`.
+
+Associations are **implicated systems in the mapping**, not claims of unique anatomical localization or demonstrated causal attribution. Human-centered subtitles are illustrative functional summaries, not exclusive roles.

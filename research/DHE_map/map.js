@@ -1,360 +1,296 @@
 'use strict';
 (() => {
-  const SVG_NS = 'http://www.w3.org/2000/svg';
-  const $ = (id) => document.getElementById(id);
-  const canvas = $('diagram-canvas');
-  const query = $('map-search');
-  const reset = $('map-reset');
-  const feedback = $('diagram-feedback');
-  const showAllButton = $('map-show-all');
-  const guide = $('diagram-guide-text');
-  let graph = null;
-  let matches = [];
-  let currentFocus = null;
-  let focusedView = false;
-  let previousScrollY = null;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const canvas=$('diagram-canvas'), query=$('map-search');
+  const feedback=$('diagram-feedback'), guide=$('diagram-guide-text');
+  const showAll=$('map-show-all'), depthInput=$('map-depth');
+  const depthLabel=$('map-depth-value'), depthRow=$('map-depth-row');
+  let data=null, root=null, previousScroll=null;
+  const make=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined) el.textContent=text;if(cls)el.className=cls;return el;};
+  const S=(tag,attrs={},text)=>{const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));if(text!==undefined)el.textContent=String(text);return el;};
+  const color=phase=>data.phases.find(p=>p.name===phase)?.color||'#89928c';
+  const phaseLabel=phase=>`Phase ${phase.order}: ${phase.name}`;
+  const depthDescription=[
+    'Directly connected systems or papers.',
+    'Also show papers or systems sharing those connections.',
+    'Expand one more step through shared relationships.',
+    'Continue expanding the connected research network.',
+    'Show a wider connected network (up to five hops).'
+  ];
+  const pad=n=>String(n).padStart(2,'0');
 
-  function svg(tag, attrs = {}, text) {
-    const el = document.createElementNS(SVG_NS, tag);
-    for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
-    if (text !== undefined) el.textContent = String(text);
-    return el;
-  }
-  const textNode = (tag, content, className) => {
-    const el = document.createElement(tag);
-    el.textContent = content;
-    if (className) el.className = className;
-    return el;
-  };
-  function color(phase) {
-    return graph.phases.find(x => x.name === phase)?.color || '#888';
-  }
-
-  function setFocus(selected) {
-    currentFocus = selected;
-    const allNodes = canvas.querySelectorAll('.map-node');
-    const edges = canvas.querySelectorAll('.edge');
-    const papers = new Set();
-    const phases = new Set();
-    const systems = new Set();
-    if (selected) {
-      if (selected.type === 'phase') {
-        phases.add(selected.id);
-        graph.papers.filter(p => p.phase === selected.id).forEach(p => papers.add(p.name));
-      } else if (selected.type === 'paper') {
-        papers.add(selected.id);
-        const p = graph.papers.find(p => p.name === selected.id);
-        if (p) phases.add(p.phase);
-      } else if (selected.type === 'system') {
-        systems.add(selected.id);
-        graph.edges.filter(e => e.system === selected.id).forEach(e => {
-          papers.add(e.paper);
-          phases.add(e.phase);
-        });
+  function focusHover(selected){
+    if(root) return;
+    const papers=new Set(), systems=new Set(), phases=new Set();
+    if(selected){
+      if(selected.type==='paper') papers.add(selected.id);
+      if(selected.type==='system') systems.add(selected.id);
+      if(selected.type==='phase') data.papers.filter(p=>p.phase===selected.id).forEach(p=>papers.add(p.name));
+      for(const e of data.edges){
+        if(papers.has(e.paper)) systems.add(e.system);
+        if(selected.type==='system'&&e.system===selected.id) papers.add(e.paper);
       }
-      for (const e of graph.edges) if (papers.has(e.paper)) systems.add(e.system);
+      for(const p of data.papers) if(papers.has(p.name)) phases.add(p.phase);
     }
-    const dim = Boolean(selected);
-    allNodes.forEach(n => {
-      const type = n.dataset.type, id = n.dataset.id;
-      const highlighted = type === 'phase' ? phases.has(id) : type === 'paper' ? papers.has(id) : systems.has(id);
-      n.classList.toggle('dimmed', dim && !highlighted);
-      n.classList.toggle('emphasized', dim && highlighted);
+    canvas.querySelectorAll('.map-node').forEach(n=>{
+      const active=n.dataset.type==='phase'?phases.has(n.dataset.id):n.dataset.type==='paper'?papers.has(n.dataset.id):systems.has(n.dataset.id);
+      n.classList.toggle('dimmed',!!selected&&!active);
+      n.classList.toggle('emphasized',!!selected&&active);
     });
-    edges.forEach(e => {
-      const highlight = e.dataset.kind === 'phase'
-        ? (selected?.type === 'system'
-            ? graph.edges.some(x => x.system === selected.id && x.paper === e.dataset.paper)
-            : papers.has(e.dataset.paper))
-        : (selected?.type === 'system' ? e.dataset.system === selected.id
-           : selected?.type === 'paper' ? e.dataset.paper === selected.id
-           : papers.has(e.dataset.paper));
-      e.classList.toggle('dimmed', dim && !highlight);
-      e.classList.toggle('emphasized', dim && highlight);
+    canvas.querySelectorAll('.edge').forEach(e=>{
+      const active=e.dataset.kind==='phase' ? papers.has(e.dataset.paper) :
+        (selected?.type==='system'?e.dataset.system===selected.id:papers.has(e.dataset.paper));
+      e.classList.toggle('dimmed',!!selected&&!active);
+      e.classList.toggle('emphasized',!!selected&&active);
     });
-    if (!selected) feedback.textContent = 'Every label is a link to its corresponding page.';
-    else if (selected.type === 'phase') feedback.textContent = `${selected.id}: ${papers.size} connected paper${papers.size === 1 ? '' : 's'}. Select to open the phase page.`;
-    else if (selected.type === 'paper') feedback.textContent = `${selected.id}: ${graph.edges.filter(e => e.paper === selected.id).length} mapped systems. Select to open the paper page.`;
-    else feedback.textContent = `${selected.id}: ${graph.edges.filter(e => e.system === selected.id).length} connected papers. Select to open the system page.`;
   }
 
-  function drawNode(parent, {x,y,w,h,type,id,url,label,fill,stroke,small=false,count=null}) {
-    const a = svg('a',{href:url, 'aria-label':`${type}: ${label}`,class:'map-node'});
-    a.dataset.type=type;
-    a.dataset.id=id;
-    a.appendChild(svg('rect',{x,y,width:w,height:h,rx:3,fill,stroke,class:'node-rect'}));
-    a.appendChild(svg('text',{x:x+w/2-(count===null?0:14),y:y+h/2+1,class:'node-label'+(small?' system-label':'')},label));
-    if (count !== null) a.appendChild(svg('text',{x:x+w-15,y:y+h/2+1,'text-anchor':'end',class:'node-label system-count'},`[${count}]`));
-    a.appendChild(svg('title',{},`${label} — open page`));
-    let hoverTimer = null;
-    a.addEventListener('pointerenter',() => {
-      if (focusedView) return;
-      setFocus({type,id});
-      if (type === 'paper' || type === 'system') {
-        hoverTimer = window.setTimeout(() => {
-          hoverTimer = null;
-          enterFocusedView({type,id});
-        }, 280);
-      }
+  function node(parent,{x,y,w,h,type,id,label,url,fill,stroke,count,selected=false}){
+    const a=S('a',{href:url,'aria-label':`${label}. ${root?'Open page':'Click to explore connections'}`,class:`map-node${selected?' selected-root':''}`});
+    a.dataset.type=type;a.dataset.id=id;
+    a.appendChild(S('rect',{x,y,width:w,height:h,rx:4,fill,stroke,class:'node-rect'}));
+    a.appendChild(S('text',{x:x+w/2-(count===undefined?0:15),y:y+h/2+1,class:`node-label${type==='system'?' system-label':''}`},label));
+    if(count!==undefined)a.appendChild(S('text',{x:x+w-12,y:y+h/2+1,'text-anchor':'end',class:'node-label system-count'},`[${count}]`));
+    const description=type==='phase'?data.phases.find(p=>p.name===id)?.description:type==='paper'?data.papers.find(p=>p.name===id)?.description:data.systems.find(s=>s.name===id)?.description;
+    a.appendChild(S('title',{},`${label}\n${description||''}\n${root?'Open the page':'Click to explore connections'}`));
+    a.addEventListener('click',event=>{
+      if(root) return; // A second click, in the filtered view, follows the real link.
+      event.preventDefault();
+      enterFocus({type,id});
     });
-    a.addEventListener('pointerleave',() => {
-      if (hoverTimer !== null) window.clearTimeout(hoverTimer);
-      hoverTimer = null;
-      if (!focusedView) setFocus(null);
-    });
-    a.addEventListener('focus',() => { if (!focusedView) setFocus({type,id}); });
-    a.addEventListener('blur',() => { if (!focusedView) setFocus(null); });
-    a.addEventListener('keydown',(event) => {
-      if (event.key === ' ' && !focusedView && (type==='paper' || type==='system')) {
-        event.preventDefault();
-        enterFocusedView({type,id});
-      }
+    a.addEventListener('pointerenter',()=>{if(!root)focusHover({type,id});});
+    a.addEventListener('pointerleave',()=>{if(!root)focusHover(null);});
+    a.addEventListener('focus',()=>{if(!root)focusHover({type,id});});
+    a.addEventListener('blur',()=>{if(!root)focusHover(null);});
+    a.addEventListener('keydown',event=>{
+      if(event.key===' '){event.preventDefault(); if(root)window.location.assign(url);else enterFocus({type,id});}
     });
     parent.appendChild(a);
   }
-
-  function renderMap() {
-    const phaseGroups = graph.phases.map(phase => ({
-      ...phase, papers: graph.papers.filter(p => p.phase === phase.name)
-    }));
-    const yPaper = new Map();
-    let y = 140;
-    phaseGroups.forEach(g => {
-      g.papers.forEach(p => { yPaper.set(p.name,y); y+=63; });
-      y+=102;
-    });
-    const paperEnd = y - 100;
-    const lastSystem = 140 + (graph.systems.length-1)*33;
-    const height = Math.max(1740,paperEnd+110,lastSystem+110);
-    const out = svg('svg',{viewBox:`0 0 1490 ${height}`,role:'img','aria-label':'Linked phase, research paper, and brain/body system diagram'});
-    out.appendChild(svg('title',{},'Research System Map: clickable phases, papers, and brain and body systems'));
-    [['Phases',170],['Papers',580],['Systems',1215]].forEach(([t,x]) => out.appendChild(svg('text',{x,y:42,class:'column-label'},t)));
-    [['PROGRAM',170],['RESEARCH ARTICLES',580],['BRAIN & BODY SYSTEMS',1215]].forEach(([t,x]) => out.appendChild(svg('text',{x,y:63,class:'column-sub'},t)));
-    const edges = svg('g',{'aria-hidden':'true'});
-    const nodes = svg('g');
-    const py = new Map(), paperPhase = new Map();
-    for (const group of phaseGroups) {
-      const ys = group.papers.map(p=>yPaper.get(p.name));
-      const center = ys.length ? (ys[0]+ys.at(-1))/2 : 120;
-      for (const p of group.papers) {
-        paperPhase.set(p.name,group.name);
-        py.set(p.name,yPaper.get(p.name));
-        const a = svg('path',{d:`M 270 ${center} C 335 ${center}, 353 ${yPaper.get(p.name)}, 450 ${yPaper.get(p.name)}`,
-          stroke:color(group.name),class:'edge phase-edge'});
-        a.dataset.kind='phase'; a.dataset.paper=p.name; edges.appendChild(a);
-      }
-      drawNode(nodes,{x:58,y:center-19,w:212,h:38,type:'phase',id:group.name,
-        url:group.url,label:group.name,fill:group.color+'24',stroke:group.color});
-    }
-    const systemYs=new Map();
-    graph.systems.forEach((s,i)=>systemYs.set(s.name,140+i*33));
-    graph.edges.forEach(e => {
-      const y1=py.get(e.paper),y2=systemYs.get(e.system);
-      const path=svg('path',{d:`M 715 ${y1} C 845 ${y1}, 895 ${y2}, 1008 ${y2}`,
-        stroke:color(e.phase),class:'edge system-edge'});
-      path.dataset.kind='system'; path.dataset.paper=e.paper;
-      path.dataset.system=e.system; edges.appendChild(path);
-    });
-    graph.papers.forEach(p => drawNode(nodes,{x:450,y:py.get(p.name)-15,w:265,h:30,type:'paper',id:p.name,
-       url:p.url,label:p.name,fill:color(p.phase)+'23',stroke:color(p.phase)}));
-    graph.systems.forEach(s=>drawNode(nodes,{x:1008,y:systemYs.get(s.name)-12,w:436,h:24,
-        type:'system',id:s.name,url:s.url,label:s.name,fill:'#f7f7f7',stroke:'#a8adb5',small:true,count:s.count}));
-    out.append(edges,nodes);
-    canvas.replaceChildren(out);
-    if (graph.systems.some(s=>s.name.length>52)) console.warn('Very long system labels may need resizing');
+  function phaseNode(group,grpY,edges,nodes,focused=false){
+    const x=focused?30:55,w=focused?200:220,h=38;
+    node(nodes,{x,y:grpY-h/2,w,h,type:'phase',id:group.name,label:phaseLabel(group),url:group.url,
+      fill:group.color+'24',stroke:group.color,selected:root?.type==='phase'&&root.id===group.name});
+    return x+w;
+  }
+  function path(parent,{x1,y1,x2,y2,stroke,kind,paper,system}){
+    const curve=(x2-x1)*0.38;
+    const e=S('path',{d:`M ${x1} ${y1} C ${x1+curve} ${y1}, ${x2-curve} ${y2}, ${x2} ${y2}`,
+      stroke,class:`edge ${kind==='phase'?'phase-edge':'system-edge'}`});
+    e.dataset.kind=kind;e.dataset.paper=paper;if(system)e.dataset.system=system;parent.appendChild(e);
   }
 
-  // Focus keeps one node and its immediate neighborhood together in a compact map.
-  // The original full diagram can be restored at any time without changing links or source data.
-  function enterFocusedView(selected) {
-    if (focusedView || !graph) return;
-    focusedView = true;
-    previousScrollY = window.scrollY;
-    currentFocus = selected;
-    const phaseX = 35, phaseW = 194, paperX = 334, paperW = 286;
-    const systemX = 778, systemW = 307;
-    const output = svg('svg',{
-      viewBox:'0 0 1120 480', role:'img',
-      'aria-label':`Focused connections for ${selected.id}`
+  function renderAll(){
+    const groups=data.phases.map(phase=>({...phase,papers:data.papers.filter(p=>p.phase===phase.name)}));
+    const paperY=new Map();let y=130;
+    groups.forEach(g=>{g.papers.forEach(p=>{paperY.set(p.name,y);y+=62;});y+=105;});
+    const systemsY=new Map();data.systems.forEach((sys,i)=>systemsY.set(sys.name,132+i*33));
+    const height=Math.max(1710,y+40,Math.max(...systemsY.values())+66);
+    const output=S('svg',{viewBox:`0 0 1490 ${height}`,role:'group','aria-label':'Clickable network of research phases, papers and brain and body systems'});
+    output.append(S('title',{},'Click a label to reveal its connections'));
+    [['PHASES',173],['PAPERS',584],['BRAIN & BODY SYSTEMS',1223]].forEach(([label,x])=>output.append(S('text',{x,y:50,class:'column-label'},label)));
+    const lines=S('g',{'aria-hidden':'true'}),nodes=S('g');
+    groups.forEach(g=>{
+      if(!g.papers.length)return;
+      const ys=g.papers.map(p=>paperY.get(p.name)),cy=(ys[0]+ys.at(-1))/2;
+      phaseNode(g,cy,lines,nodes);
+      g.papers.forEach(p=>path(lines,{x1:275,y1:cy,x2:450,y2:paperY.get(p.name),stroke:color(g.name),kind:'phase',paper:p.name}));
     });
-    const edges = svg('g',{'aria-hidden':'true'}), nodes=svg('g');
-    const columnHeader = (label,x) => output.appendChild(svg('text',{x,y:42,class:'column-label'},label));
-    columnHeader('Phases',phaseX+phaseW/2);
-    columnHeader('Papers',paperX+paperW/2);
-    columnHeader('Systems',systemX+systemW/2);
+    for(const e of data.edges)path(lines,{x1:715,y1:paperY.get(e.paper),x2:1008,y2:systemsY.get(e.system),stroke:color(e.phase),kind:'system',paper:e.paper,system:e.system});
+    data.papers.forEach(p=>node(nodes,{x:450,y:paperY.get(p.name)-15,w:265,h:30,type:'paper',id:p.name,url:p.url,label:p.name,fill:color(p.phase)+'23',stroke:color(p.phase)}));
+    data.systems.forEach(s=>node(nodes,{x:1008,y:systemsY.get(s.name)-12,w:436,h:24,type:'system',id:s.name,url:s.url,label:s.name,fill:'#f7f7f7',stroke:'#9aa69c',count:s.count}));
+    output.append(lines,nodes);canvas.replaceChildren(output);
+    canvas.classList.remove('focused');showAll.hidden=true;depthRow.hidden=true;
+    guide.textContent='Click a phase, paper, or system to explore its connections.';
+    feedback.textContent='Click once to filter. In the filtered view, click any label to open its page; click empty space to clear.';
+  }
 
-    const phaseEdge = (p,phaseY,paperY) => {
-      edges.appendChild(svg('path',{
-        d:`M ${phaseX+phaseW} ${phaseY} C 272 ${phaseY}, 287 ${paperY}, ${paperX} ${paperY}`,
-        stroke:color(p.phase),class:'edge phase-edge'
-      }));
-    };
-    const systemEdge = (p,paperY,systemY) => {
-      edges.appendChild(svg('path',{
-        d:`M ${paperX+paperW} ${paperY} C 694 ${paperY}, 711 ${systemY}, ${systemX} ${systemY}`,
-        stroke:color(p.phase),class:'edge system-edge'
-      }));
-    };
-
-    let height;
-    if (selected.type === 'system') {
-      const linked = new Set(graph.edges.filter(e=>e.system===selected.id).map(e=>e.paper));
-      const papers = graph.papers.filter(p=>linked.has(p.name));
-      const grouped = graph.phases.map(phase=>({phase, papers:papers.filter(p=>p.phase===phase.name)}))
-        .filter(g=>g.papers.length);
-      const paperY=new Map(), phaseY=new Map();
-      let y=110;
-      for (const g of grouped) {
-        const first=y;
-        g.papers.forEach(p=>{paperY.set(p.name,y); y+=36;});
-        phaseY.set(g.phase.name,(first+y-36)/2);
-        y+=16;
-      }
-      const coords=[...paperY.values()];
-      const center=coords.length?(coords[0]+coords.at(-1))/2:190;
-      height=Math.max(220,y+30);
-      for (const g of grouped) {
-        const yc=phaseY.get(g.phase.name);
-        drawNode(nodes,{x:phaseX,y:yc-19,w:phaseW,h:38,type:'phase',id:g.phase.name,
-          url:g.phase.url,label:g.phase.name,fill:g.phase.color+'24',stroke:g.phase.color});
-        for (const p of g.papers) {
-          const py=paperY.get(p.name);
-          phaseEdge(p,yc,py); systemEdge(p,py,center);
-          drawNode(nodes,{x:paperX,y:py-16,w:paperW,h:32,type:'paper',id:p.name,
-            url:p.url,label:p.name,fill:color(p.phase)+'23',stroke:color(p.phase)});
+  // 0 layers = one direct paper/system hop. Each additional layer expands one
+  // more hop on the bipartite paper ↔ system graph, never on cosmetic phase edges.
+  function neighborhood(selected,depth){
+    const papers=new Set(),systems=new Set();
+    let frontier=[];
+    if(selected.type==='paper'){
+      papers.add(selected.id);frontier=[{type:'paper',id:selected.id}];
+    }else if(selected.type==='system'){
+      systems.add(selected.id);frontier=[{type:'system',id:selected.id}];
+    }else{
+      const candidates=data.papers.filter(p=>p.phase===selected.id);
+      candidates.forEach(p=>papers.add(p.name));
+      frontier=candidates.map(p=>({type:'paper',id:p.name}));
+    }
+    for(let step=0;step<=depth;step++){
+      const next=[];
+      for(const n of frontier){
+        if(n.type==='paper'){
+          for(const e of data.edges){
+            if(e.paper===n.id&&!systems.has(e.system)){
+              systems.add(e.system);next.push({type:'system',id:e.system});
+            }
+          }
+        } else {
+          for(const e of data.edges){
+            if(e.system===n.id&&!papers.has(e.paper)){
+              papers.add(e.paper);next.push({type:'paper',id:e.paper});
+            }
+          }
         }
       }
-      const sys=graph.systems.find(x=>x.name===selected.id);
-      drawNode(nodes,{x:systemX,y:center-18,w:systemW,h:36,type:'system',id:sys.name,
-        url:sys.url,label:sys.name,fill:'#f2f4f2',stroke:'#79887e',small:true,count:sys.count});
-      feedback.textContent=`${sys.name}: ${papers.length} connected paper${papers.length===1?'':'s'}. Select any label to open its page; choose “Show full map” to return.`;
-    } else {
-      const paper=graph.papers.find(p=>p.name===selected.id);
-      if (!paper) { focusedView=false;return; }
-      const phase=graph.phases.find(x=>x.name===paper.phase);
-      const linked = new Set(graph.edges.filter(e=>e.paper===paper.name).map(e=>e.system));
-      const systems = graph.systems.filter(s=>linked.has(s.name));
-      const initial=105, step=27;
-      const end=initial+(Math.max(1,systems.length)-1)*step;
-      const center=(initial+end)/2;
-      height=Math.max(235,end+65);
-      drawNode(nodes,{x:phaseX,y:center-19,w:phaseW,h:38,type:'phase',id:phase.name,
-        url:phase.url,label:phase.name,fill:phase.color+'24',stroke:phase.color});
-      drawNode(nodes,{x:paperX,y:center-17,w:paperW,h:34,type:'paper',id:paper.name,
-        url:paper.url,label:paper.name,fill:phase.color+'23',stroke:phase.color});
-      phaseEdge(paper,center,center);
-      systems.forEach((sys,i)=>{
-        const sy=initial+i*step;
-        systemEdge(paper,center,sy);
-        drawNode(nodes,{x:systemX,y:sy-12,w:systemW,h:24,type:'system',id:sys.name,
-          url:sys.url,label:sys.name,fill:'#f2f4f2',stroke:'#79887e',small:true,count:sys.count});
-      });
-      if (!systems.length) nodes.appendChild(svg('text',{
-        x:systemX+systemW/2,y:center,class:'focus-no-systems'
-      },'No systems assigned in the workbook'));
-      feedback.textContent=`${paper.name}: ${systems.length} mapped system${systems.length===1?'':'s'}. Select any label to open its page; choose “Show full map” to return.`;
+      frontier=next;if(!frontier.length)break;
     }
-    output.setAttribute('viewBox',`0 0 1120 ${height}`);
-    output.append(edges,nodes);
-    canvas.classList.add('focused');
-    canvas.replaceChildren(output);
-    showAllButton.hidden=false;
-    guide.textContent=`Focused connections: ${selected.id}`;
-    // The triggering node may be below the fold in the full map. Bring the compact
-    // view into the viewport so the system and paper columns are visible together.
-    const top=window.scrollY+canvas.getBoundingClientRect().top-80;
-    window.scrollTo({top:Math.max(0,top),behavior:'auto'});
+    return {papers,systems};
   }
 
-  function restoreFullMap() {
-    if (!focusedView || !graph) return;
-    focusedView=false;
-    currentFocus=null;
-    canvas.classList.remove('focused');
-    showAllButton.hidden=true;
-    guide.textContent='Hover over a paper or system to isolate its connections.';
-    renderMap();
-    setFocus(null);
-    if (previousScrollY!==null) window.scrollTo({top:previousScrollY,behavior:'auto'});
-    previousScrollY=null;
+  function renderFocus(){
+    if(!root)return;
+    const depth=Number(depthInput.value);
+    const active=neighborhood(root,depth);
+    const papers=data.papers.filter(p=>active.papers.has(p.name));
+    const systems=data.systems.filter(s=>active.systems.has(s.name));
+    const groups=data.phases.map(phase=>({...phase,papers:papers.filter(p=>p.phase===phase.name)})).filter(g=>g.papers.length);
+    const px=330,pw=286,sx=770,sw=330;
+    const paperY=new Map(),phaseY=new Map(),systemY=new Map();
+    let y=110;
+    groups.forEach(g=>{
+      const first=y;
+      g.papers.forEach(p=>{paperY.set(p.name,y);y+=38;});
+      phaseY.set(g.name,(first+y-38)/2);
+      y+=17;
+    });
+    const paperExtent=y+22;
+    const sysStep=systems.length>31?26:systems.length>18?29:32;
+    const sysTop=106;
+    systems.forEach((s,i)=>systemY.set(s.name,sysTop+i*sysStep));
+    const systemExtent=sysTop+Math.max(1,systems.length-1)*sysStep+65;
+    const height=Math.max(225,paperExtent,systemExtent);
+    // When many systems are visible, center smaller groups against the taller column.
+    if(paperExtent>systemExtent&&systems.length){
+      const shift=(paperExtent-systemExtent)/2;
+      systemY.forEach((v,k)=>systemY.set(k,v+shift));
+    }else if(systemExtent>paperExtent&&papers.length){
+      const shift=(systemExtent-paperExtent)/2;
+      paperY.forEach((v,k)=>paperY.set(k,v+shift));
+      phaseY.forEach((v,k)=>phaseY.set(k,v+shift));
+    }
+    const output=S('svg',{viewBox:`0 0 1135 ${height}`,role:'group',
+      'aria-label':`Connections for ${root.id}, depth ${depth}`});
+    output.append(S('title',{},`Selected ${root.id}: ${papers.length} papers and ${systems.length} systems`));
+    [['PHASES',130],['PAPERS',473],['BRAIN & BODY SYSTEMS',935]].forEach(([label,x])=>output.append(S('text',{x,y:52,class:'column-label'},label)));
+    const lines=S('g',{'aria-hidden':'true'}),nodes=S('g');
+    groups.forEach(g=>{
+      const yc=phaseY.get(g.name);
+      phaseNode(g,yc,lines,nodes,true);
+      g.papers.forEach(p=>{
+        path(lines,{x1:230,y1:yc,x2:px,y2:paperY.get(p.name),stroke:color(g.name),kind:'phase',paper:p.name});
+      });
+    });
+    for(const e of data.edges){
+      if(paperY.has(e.paper)&&systemY.has(e.system)){
+        path(lines,{x1:px+pw,y1:paperY.get(e.paper),x2:sx,y2:systemY.get(e.system),stroke:color(e.phase),kind:'system',paper:e.paper,system:e.system});
+      }
+    }
+    papers.forEach(p=>node(nodes,{x:px,y:paperY.get(p.name)-16,w:pw,h:32,type:'paper',id:p.name,label:p.name,url:p.url,
+      fill:color(p.phase)+'23',stroke:color(p.phase),selected:root.type==='paper'&&root.id===p.name}));
+    systems.forEach(s=>node(nodes,{x:sx,y:systemY.get(s.name)-14,w:sw,h:28,type:'system',id:s.name,label:s.name,url:s.url,
+      fill:'#f6f6f4',stroke:'#89988f',count:s.count,selected:root.type==='system'&&root.id===s.name}));
+    if(!systems.length)output.append(S('text',{x:sx+sw/2,y:Math.max(140,height/2),class:'focus-no-systems'},'No systems currently mapped'));
+    output.append(lines,nodes);
+    canvas.classList.add('focused');canvas.replaceChildren(output);
+    showAll.hidden=false;depthRow.hidden=false;
+    depthLabel.textContent=`${depth} — ${depthDescription[depth]}`;
+    guide.textContent=`Focused on ${root.id}: ${papers.length} paper${papers.length===1?'':'s'} · ${systems.length} system${systems.length===1?'':'s'}`;
+    feedback.textContent='Click any visible label to open its page, or click empty diagram space to show everything again.';
   }
-  showAllButton.addEventListener('click',restoreFullMap);
-  document.addEventListener('keydown', event => {
-    if (event.key==='Escape' && focusedView) restoreFullMap();
+
+  function enterFocus(selected){
+    if(!data)return;
+    root=selected;
+    previousScroll=window.scrollY;
+    depthInput.value='0';
+    query.value='';
+    renderFocus();
+    const target=window.scrollY+canvas.getBoundingClientRect().top-90;
+    window.scrollTo({top:Math.max(0,target),behavior:'auto'});
+  }
+  function restore(){
+    if(!root)return;
+    root=null;renderAll();
+    if(previousScroll!==null)window.scrollTo({top:previousScroll,behavior:'auto'});
+    previousScroll=null;
+  }
+  // Any non-control click outside a map node dismisses the active filter.
+  // The depth control is exempt so its label and slider remain interactive.
+  document.addEventListener('click',event=>{
+    if(root&&!event.target.closest('.map-node, #map-depth-row, #map-show-all')) restore();
   });
+  showAll.addEventListener('click',restore);
+  depthInput.addEventListener('input',()=>{if(root)renderFocus();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&root)restore();});
 
-  function renderMobile() {
-    const holder=$('mobile-phases');
-    for(const phase of graph.phases) {
-      const detail=document.createElement('details'); detail.className='mobile-phase';
-      if (phase.name==='Construction') detail.open=true;
-      const sum=textNode('summary',`${phase.name} — ${graph.papers.filter(p=>p.phase===phase.name).length} papers`);
-      detail.append(sum);
-      const phaseLink=textNode('a',`Open ${phase.name} phase →`,'phase-open');phaseLink.href=phase.url;detail.append(phaseLink);
-      for(const paper of graph.papers.filter(p=>p.phase===phase.name)) {
-        const pd=document.createElement('details');pd.className='mobile-paper';
-        pd.dataset.search=[paper.name,...graph.edges.filter(e=>e.paper===paper.name).map(e=>e.system)].join(' ').toLowerCase();
-        const sm=document.createElement('summary');sm.append(textNode('strong',paper.name));pd.append(sm);
-        const link=textNode('a',paper.detailPending?'View current paper listing →':'Open paper page →','paper-open');link.href=paper.url;pd.append(link);
-        const systems=document.createElement('div');systems.className='system-row';
-        const names=new Set(graph.edges.filter(e=>e.paper===paper.name).map(e=>e.system));
-        if (!names.size) systems.append(textNode('span','No anatomical systems assigned in the workbook.'));
-        [...names].sort().forEach(name=>{
-          const sys=graph.systems.find(s=>s.name===name);
-          const item=textNode('a',name);item.href=sys.url;systems.append(item);
+  function renderMobile(){
+    const holder=$('mobile-phases');holder.replaceChildren();
+    for(const phase of data.phases){
+      const detail=make('details',undefined,'mobile-phase');if(phase.name==='Foundation')detail.open=true;
+      const summary=make('summary');summary.append(make('strong',`${phaseLabel(phase)} — ${phase.paperCount} paper${phase.paperCount===1?'':'s'}`));
+      detail.append(summary,make('p',phase.description,'phase-tagline'));
+      const open=make('a',`Explore ${phase.name} phase →`,'phase-open');open.href=phase.url;detail.append(open);
+      for(const paper of data.papers.filter(p=>p.phase===phase.name)){
+        const pd=make('details',undefined,'mobile-paper');
+        pd.dataset.search=[phase.name,paper.name,paper.description,...data.edges.filter(e=>e.paper===paper.name).map(e=>e.system)].join(' ').toLowerCase();
+        const sm=make('summary');sm.append(make('strong',paper.name),make('span',paper.description,'paper-tagline'));pd.append(sm);
+        const link=make('a',paper.detailPending?'View current paper listing →':'Open paper page →','paper-open');link.href=paper.url;pd.append(link);
+        const names=new Set(data.edges.filter(e=>e.paper===paper.name).map(e=>e.system));
+        const systems=make('div',undefined,'system-row');
+        if(!names.size)systems.append(make('span','No systems currently mapped.'));
+        else data.systems.filter(s=>names.has(s.name)).forEach(s=>{
+          const a=make('a',s.name);a.href=s.url;a.title=s.description;systems.append(a);
         });
         pd.append(systems);detail.append(pd);
       }
       holder.append(detail);
     }
-    const directory=$('mobile-systems');directory.className='mobile-systems-grid';
-    for(const s of graph.systems) {
-      const link=document.createElement('a');link.href=s.url;link.dataset.search=s.name.toLowerCase();
-      link.append(document.createTextNode(s.name),textNode('span',String(s.count)));
-      directory.append(link);
+    const directory=$('mobile-systems');directory.replaceChildren();directory.className='mobile-systems-grid';
+    for(const system of data.systems){
+      const a=make('a',undefined,'mobile-system-link');a.href=system.url;
+      a.dataset.search=`${system.name} ${system.description}`.toLowerCase();
+      const header=make('span',undefined,'mobile-system-header');header.append(make('strong',system.name),make('span',`${system.count} paper${system.count===1?'':'s'}`,'mobile-system-count'));
+      a.append(header,make('span',system.description,'mobile-system-description'));directory.append(a);
     }
   }
-
-  function applySearch() {
-    if (focusedView) restoreFullMap();
+  function applySearch(){
     const term=query.value.trim().toLowerCase();
-    const nodes=canvas.querySelectorAll('.map-node');
-    if (!term) { setFocus(null); nodes.forEach(n=>n.classList.remove('dimmed','emphasized')); }
-    else {
-      matches=graph.papers.filter(p=>p.name.toLowerCase().includes(term)).map(p=>({type:'paper',id:p.name}))
-        .concat(graph.systems.filter(s=>s.name.toLowerCase().includes(term)).map(s=>({type:'system',id:s.name})))
-        .concat(graph.phases.filter(p=>p.name.toLowerCase().includes(term)).map(p=>({type:'phase',id:p.name})));
-      if(matches.length===1) setFocus(matches[0]);
-      else {
-        setFocus(null);
-        nodes.forEach(n=>{
-          const hit=n.dataset.id.toLowerCase().includes(term);
-          n.classList.toggle('dimmed',!hit);
-          n.classList.toggle('emphasized',hit);
-        });
-        feedback.textContent=`${matches.length} matching items. Select any item to open its page.`;
-      }
+    if(!data)return;
+    if(root)restore();
+    if(!term){focusHover(null);feedback.textContent='Click a label to filter the graph; click it in the filtered view to open its page.';}
+    else{
+      let count=0;
+      canvas.querySelectorAll('.map-node').forEach(n=>{
+        const type=n.dataset.type,id=n.dataset.id;
+        const desc=(type==='phase'?data.phases:type==='paper'?data.papers:data.systems).find(x=>x.name===id)?.description||'';
+        const match=(id+' '+desc).toLowerCase().includes(term);
+        if(match)count++;
+        n.classList.toggle('dimmed',!match);n.classList.toggle('emphasized',match);
+      });
+      canvas.querySelectorAll('.edge').forEach(e=>e.classList.remove('emphasized'));
+      feedback.textContent=`${count} matching map labels. Click a label to explore.`;
     }
-    document.querySelectorAll('.mobile-paper').forEach(p=>{
-      const hit=p.dataset.search.includes(term);
-      p.hidden=Boolean(term&&!hit);
-      if(term&&hit) p.open=true;
-    });
+    document.querySelectorAll('.mobile-paper').forEach(p=>{p.hidden=!!term&&!p.dataset.search.includes(term);if(term&&!p.hidden)p.open=true;});
     document.querySelectorAll('.mobile-phase').forEach(p=>{
-      const visible=[...p.querySelectorAll('.mobile-paper')].some(x=>!x.hidden);
-      p.hidden=Boolean(term&&!visible&&!p.querySelector('summary').textContent.toLowerCase().includes(term));
-      if(term&&visible) p.open=true;
+      const hit=[...p.querySelectorAll('.mobile-paper')].some(x=>!x.hidden);
+      p.hidden=!!term&&!hit&&!p.querySelector('summary').textContent.toLowerCase().includes(term);
+      if(term&&hit)p.open=true;
     });
-    document.querySelectorAll('.mobile-systems-grid a').forEach(a=>a.hidden=Boolean(term&&!a.dataset.search.includes(term)));
+    document.querySelectorAll('.mobile-system-link').forEach(a=>{a.hidden=!!term&&!a.dataset.search.includes(term);});
   }
   query.addEventListener('input',applySearch);
-  reset.addEventListener('click',()=>{query.value=''; applySearch();query.focus();});
-  fetch('research-map.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return r.json();})
-    .then(data=>{
-      if(!Array.isArray(data.phases)||!Array.isArray(data.papers)||!Array.isArray(data.systems)||!Array.isArray(data.edges)) throw new Error('Unexpected map data format');
-      graph=data;
+  $('map-reset').addEventListener('click',()=>{query.value='';applySearch();query.focus();});
+  fetch('research-map.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(`${r.status} ${r.statusText}`);return r.json();})
+    .then(graph=>{
+      if(!Array.isArray(graph.phases)||!Array.isArray(graph.papers)||!Array.isArray(graph.systems)||!Array.isArray(graph.edges))throw Error('Invalid map JSON');
+      data=graph;
       $('map-counts').textContent=`${data.counts.phases} phases · ${data.counts.papers} papers · ${data.counts.systems} systems · ${data.counts.connections} paper–system connections`;
-      renderMap();renderMobile();
+      renderAll();renderMobile();
     })
-    .catch(err=>{canvas.replaceChildren(textNode('p','The map data could not be loaded. Recheck the JSON file and deploy the complete DHE_map folder.'));$('map-counts').textContent=`Data unavailable: ${err.message}`;});
+    .catch(error=>{canvas.replaceChildren(make('p','The research map could not be loaded.'));$('map-counts').textContent=error.message;});
 })();

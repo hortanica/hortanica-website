@@ -52,7 +52,7 @@
 .data-note { max-width:760px; margin:22px auto 0; color:var(--muted); font-size:.81rem; text-align:center; line-height:1.6; }
 .data-note code { font-size:.9em; }
 .mobile-explorer { display:none; }
-@media(max-width:1000px) {
+@media(max-width:1100px) {
   .diagram-shell { display:none; }
   .mobile-explorer { display:block; max-width:800px; margin:16px auto 0; padding-top:22px; border-top:1px solid var(--rule); }
   .mobile-explorer h2 { margin: 0 0 6px; font-size:1.7rem; }
@@ -80,3 +80,23 @@
   .map-search-row button { padding-inline:12px; }
   .mobile-phase > summary { min-height:44px; }
 }
+/* Click-to-focus and connection depth controls */
+.map-depth-row[hidden] {display:none;}
+.map-depth-row {display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 13px 14px;margin:0 0 10px;background:#f2f4ee;border:1px solid #d1d9cd;border-radius:4px;color:var(--green);font-size:.9rem;}
+.map-depth-row label {font-weight:700;white-space:nowrap;}
+.map-depth-row label strong {font-weight:400;color:var(--muted);font-size:.8rem;}
+.map-depth-row input {accent-color:var(--green);flex:1;min-width:150px;max-width:330px;cursor:pointer;}
+.map-depth-row span {flex:1 1 225px;color:var(--muted);font-size:.82rem;}
+.diagram-canvas.focused .selected-root .node-rect {stroke:#162d20;stroke-width:3;}
+.diagram-canvas.focused .node-label {font-size:14px;}
+.diagram-canvas.focused .system-label {font-size:12px;}
+.diagram-canvas.focused .system-count {font-size:11px;}
+.mobile-phase .phase-tagline {font-style:italic;color:var(--muted);margin:0 0 12px 4px;}
+.mobile-paper .paper-tagline {display:block;font-weight:400;color:var(--muted);font-style:italic;font-size:.9rem;margin-top:5px;line-height:1.55;}
+.mobile-systems-grid .mobile-system-link {display:block;padding:12px 5px;text-decoration:none;}
+.mobile-system-header {display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.mobile-system-header strong {font-weight:700;color:var(--green);line-height:1.3;}
+.mobile-systems-grid .mobile-system-description {display:block;color:var(--muted);font-size:.86rem;font-style:italic;margin-top:5px;line-height:1.45;}
+.mobile-system-header .mobile-system-count {color:var(--muted);font-size:.76rem;white-space:nowrap;}
+.mobile-paper[hidden],.mobile-phase[hidden],.mobile-system-link[hidden] {display:none!important;}
+
