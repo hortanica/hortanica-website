@@ -47,24 +47,31 @@
   }
 
   function node(parent,{x,y,w,h,type,id,label,url,fill,stroke,count,selected=false}){
-    const a=S('a',{href:url,'aria-label':`${label}. ${root?'Open page':'Click to explore connections'}`,class:`map-node${selected?' selected-root':''}`});
+    const actionText=selected?'Click again to open page':root?'Click to make this your focus':'Click to explore connections';
+    const a=S('a',{href:url,'aria-label':`${label}. ${actionText}`,class:`map-node${selected?' selected-root':''}`});
     a.dataset.type=type;a.dataset.id=id;
     a.appendChild(S('rect',{x,y,width:w,height:h,rx:4,fill,stroke,class:'node-rect'}));
     a.appendChild(S('text',{x:x+w/2-(count===undefined?0:15),y:y+h/2+1,class:`node-label${type==='system'?' system-label':''}`},label));
     if(count!==undefined)a.appendChild(S('text',{x:x+w-12,y:y+h/2+1,'text-anchor':'end',class:'node-label system-count'},`[${count}]`));
     const description=type==='phase'?data.phases.find(p=>p.name===id)?.description:type==='paper'?data.papers.find(p=>p.name===id)?.description:data.systems.find(s=>s.name===id)?.description;
-    a.appendChild(S('title',{},`${label}\n${description||''}\n${root?'Open the page':'Click to explore connections'}`));
+    a.appendChild(S('title',{},`${label}\n${description||''}\n${actionText}`));
     a.addEventListener('click',event=>{
-      if(root) return; // A second click, in the filtered view, follows the real link.
+      // Only the currently highlighted node navigates. Any other visible node
+      // becomes the focus; its next click opens the corresponding page.
+      if(root?.type===type && root.id===id) return;
       event.preventDefault();
-      enterFocus({type,id});
+      enterFocus({type,id},a);
     });
     a.addEventListener('pointerenter',()=>{if(!root)focusHover({type,id});});
     a.addEventListener('pointerleave',()=>{if(!root)focusHover(null);});
     a.addEventListener('focus',()=>{if(!root)focusHover({type,id});});
     a.addEventListener('blur',()=>{if(!root)focusHover(null);});
     a.addEventListener('keydown',event=>{
-      if(event.key===' '){event.preventDefault(); if(root)window.location.assign(url);else enterFocus({type,id});}
+      if(event.key===' '){
+        event.preventDefault();
+        if(root?.type===type&&root.id===id) window.location.assign(url);
+        else enterFocus({type,id},a);
+      }
     });
     parent.appendChild(a);
   }
@@ -103,7 +110,7 @@
     output.append(lines,nodes);canvas.replaceChildren(output);
     canvas.classList.remove('focused');showAll.hidden=true;depthRow.hidden=true;
     guide.textContent='Click a phase, paper, or system to explore its connections.';
-    feedback.textContent='Click once to filter. In the filtered view, click any label to open its page; click empty space to clear.';
+    feedback.textContent='Click a node to focus. Click another node to switch focus. Click the highlighted node again to open its page.';
   }
 
   // 0 layers = one direct paper/system hop. Each additional layer expands one
@@ -200,18 +207,29 @@
     showAll.hidden=false;depthRow.hidden=false;
     depthLabel.textContent=`${depth} — ${depthDescription[depth]}`;
     guide.textContent=`Focused on ${root.id}: ${papers.length} paper${papers.length===1?'':'s'} · ${systems.length} system${systems.length===1?'':'s'}`;
-    feedback.textContent='Click any visible label to open its page, or click empty diagram space to show everything again.';
+    feedback.textContent='Click a different node to switch focus; click the highlighted node again to open its page. Click empty space to clear.';
   }
 
-  function enterFocus(selected){
+  function enterFocus(selected,clickedNode=null){
     if(!data)return;
+    const wasFocused=!!root;
+    const clickedY=wasFocused&&clickedNode?clickedNode.getBoundingClientRect().top:null;
+    if(!wasFocused){
+      previousScroll=window.scrollY;
+      depthInput.value='0';
+      query.value='';
+    }
     root=selected;
-    previousScroll=window.scrollY;
-    depthInput.value='0';
-    query.value='';
     renderFocus();
-    const target=window.scrollY+canvas.getBoundingClientRect().top-90;
-    window.scrollTo({top:Math.max(0,target),behavior:'auto'});
+    if(!wasFocused){
+      const target=window.scrollY+canvas.getBoundingClientRect().top-90;
+      window.scrollTo({top:Math.max(0,target),behavior:'auto'});
+    } else if(clickedY!==null){
+      // Retarget without resetting the slider. Keep the clicked node near its
+      // original screen position even when the focused diagram changes height.
+      const newNode=canvas.querySelector('.selected-root');
+      if(newNode)window.scrollBy({top:newNode.getBoundingClientRect().top-clickedY,behavior:'auto'});
+    }
   }
   function restore(){
     if(!root)return;
@@ -262,7 +280,7 @@
     const term=query.value.trim().toLowerCase();
     if(!data)return;
     if(root)restore();
-    if(!term){focusHover(null);feedback.textContent='Click a label to filter the graph; click it in the filtered view to open its page.';}
+    if(!term){focusHover(null);feedback.textContent='Click to focus a node, then click that same highlighted node again to open its page.';}
     else{
       let count=0;
       canvas.querySelectorAll('.map-node').forEach(n=>{
