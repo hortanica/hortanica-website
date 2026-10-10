@@ -3,6 +3,7 @@
 .system-page .kicker { margin-bottom: 12px; }
 .system-page h1 { font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.12;margin:0 0 14px; }
 .system-lede { font-size:1.08rem;max-width:760px;margin:0 0 15px; }
+.system-explanation { max-width:760px; margin:0 0 22px; color:#444740; font-size:1rem; line-height:1.72; }
 .system-disclaimer { color:var(--muted);font-size:.86rem;max-width:760px;font-style:italic;line-height:1.5;margin:0 0 30px; }
 .system-panel { border-top:1px solid var(--rule); padding-top:26px; margin-top:26px; }
 .system-panel h2 { font-size:1.7rem;margin:0 0 12px; }
