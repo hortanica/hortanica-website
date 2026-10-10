@@ -51,10 +51,26 @@
 .diagram-feedback { text-align:center; margin: 8px 0 4px; color:var(--muted); font-size:.85rem; }
 .data-note { max-width:760px; margin:22px auto 0; color:var(--muted); font-size:.81rem; text-align:center; line-height:1.6; }
 .data-note code { font-size:.9em; }
+/* The visual map is also the mobile default; the text explorer remains available by toggle. */
+.map-view-toggle, .mobile-map-hint { display:none; }
 .mobile-explorer { display:none; }
 @media(max-width:1100px) {
-  .diagram-shell { display:none; }
-  .mobile-explorer { display:block; max-width:800px; margin:16px auto 0; padding-top:22px; border-top:1px solid var(--rule); }
+  .map-view-toggle { display:flex; width:min(100%,480px); margin:10px auto 14px; border:1px solid var(--rule); border-radius:5px; overflow:hidden; }
+  .map-view-toggle button { flex:1; padding:12px 10px; background:var(--panel); color:var(--green); border:0; font:inherit; font-size:.9rem; cursor:pointer; }
+  .map-view-toggle button + button { border-left:1px solid var(--rule); }
+  .map-view-toggle button.active, .map-view-toggle button[aria-pressed="true"] { background:var(--green); color:#fffefb; font-weight:700; }
+  .map-view-toggle button:focus-visible { outline:2px solid var(--green-soft); outline-offset:-3px; }
+  .mobile-map-hint { display:block; text-align:center; color:var(--muted); font-size:.83rem; line-height:1.5; margin:0 auto 16px; max-width:620px; }
+  .diagram-guide { flex-wrap:wrap; }
+  .diagram-actions { justify-content:flex-start; }
+  /* Keep the diagram readable: pan horizontally instead of shrinking every label. */
+  .diagram-canvas { -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; touch-action:pan-x pan-y; }
+  .diagram-canvas svg { min-width:1320px; }
+  .diagram-canvas.focused svg { min-width:1050px; }
+  .map-page[data-mobile-view="explorer"] .diagram-shell,
+  .map-page[data-mobile-view="explorer"] .mobile-map-hint { display:none; }
+  .mobile-explorer { display:none; max-width:800px; margin:16px auto 0; padding-top:22px; border-top:1px solid var(--rule); }
+  .map-page[data-mobile-view="explorer"] .mobile-explorer { display:block; }
   .mobile-explorer h2 { margin: 0 0 6px; font-size:1.7rem; }
   .mobile-explorer > p, .mobile-system-directory > p { margin:0 0 16px; color:var(--muted); }
   .mobile-phase { border-top:1px solid var(--rule); padding: 13px 0; }

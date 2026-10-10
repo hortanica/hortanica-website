@@ -17,7 +17,7 @@
   <main class="map-page">
     <header class="map-heading">
       <a class="back-link" href="../">← Research</a>
-      <p class="kicker">Decomposing the Human Experience</p>
+      <p class="kicker">Decompiling the Human Experience</p>
       <h1>Research System Map</h1>
       <p class="map-lede">Explore which brain and body systems are associated with each research paper, and how those papers fit within this program's four analytical phases.</p>
       <p class="map-disclaimer">This map records implicated systems in the current research portfolio. A connection is not a claim of unique anatomical localization or demonstrated causal attribution.</p>
@@ -27,7 +27,12 @@
       <div class="map-search-row"><input id="map-search" type="search" placeholder="Search the map…" autocomplete="off"><button id="map-reset" type="button">Clear</button></div>
       <p class="map-totals" id="map-counts" aria-live="polite">Loading portfolio data…</p>
     </div>
-    <section class="diagram-shell" aria-label="Interactive phase, paper, and system connections">
+    <div class="map-view-toggle" role="group" aria-label="Mobile map display">
+      <button type="button" id="map-view-diagram" class="active" aria-pressed="true" aria-controls="map-diagram">Interactive map</button>
+      <button type="button" id="map-view-explorer" aria-pressed="false" aria-controls="map-explorer">Text explorer</button>
+    </div>
+    <p class="mobile-map-hint">Swipe sideways to explore the diagram. Tap a node to focus; tap the highlighted node again to open its page.</p>
+    <section class="diagram-shell" id="map-diagram" aria-label="Interactive phase, paper, and system connections">
       <div class="diagram-guide">
         <span id="diagram-guide-text">Click a phase, paper, or system to explore its connections.</span>
         <div class="diagram-actions"><button type="button" id="map-show-all" hidden>← Show full map</button><a href="systems/">Browse all systems →</a></div>
@@ -41,7 +46,7 @@
       <div class="diagram-canvas" id="diagram-canvas" role="region" aria-label="Research relationship map"><p>Loading interactive map…</p></div>
       <p class="diagram-feedback" id="diagram-feedback" aria-live="polite">Click a node to focus, another to change focus, or the highlighted node again to open its page.</p>
     </section>
-    <section class="mobile-explorer" aria-label="Mobile research map">
+    <section class="mobile-explorer" id="map-explorer" aria-label="Mobile research map">
       <h2>Explore by phase</h2>
       <p>Each phase includes its papers, their research questions, and their mapped systems.</p>
       <div id="mobile-phases"></div>

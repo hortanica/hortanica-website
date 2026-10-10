@@ -6,6 +6,28 @@
   const feedback=$('diagram-feedback'), guide=$('diagram-guide-text');
   const showAll=$('map-show-all'), depthInput=$('map-depth');
   const depthLabel=$('map-depth-value'), depthRow=$('map-depth-row');
+  // The diagram remains the default at every viewport width. Under 1100px,
+  // visitors can switch to the existing text explorer without losing map focus.
+  const mapPage=document.querySelector('.map-page');
+  const diagramView=$('map-view-diagram'), explorerView=$('map-view-explorer');
+  function setMobileView(view){
+    mapPage.dataset.mobileView=view;
+    diagramView.setAttribute('aria-pressed',String(view==='diagram'));
+    explorerView.setAttribute('aria-pressed',String(view==='explorer'));
+    diagramView.classList.toggle('active',view==='diagram');
+    explorerView.classList.toggle('active',view==='explorer');
+  }
+  setMobileView('diagram');
+  diagramView.addEventListener('click',()=>setMobileView('diagram'));
+  explorerView.addEventListener('click',()=>setMobileView('explorer'));
+  function keepFocusedNodeVisible(){
+    const selected=canvas.querySelector('.selected-root');
+    if(!selected || canvas.scrollWidth<=canvas.clientWidth)return;
+    const viewport=canvas.getBoundingClientRect(), item=selected.getBoundingClientRect();
+    const inset=18;
+    if(item.left<viewport.left+inset)canvas.scrollLeft-=viewport.left+inset-item.left;
+    else if(item.right>viewport.right-inset)canvas.scrollLeft+=item.right-viewport.right+inset;
+  }
   let data=null, root=null, previousScroll=null;
   const make=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined) el.textContent=text;if(cls)el.className=cls;return el;};
   const S=(tag,attrs={},text)=>{const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));if(text!==undefined)el.textContent=String(text);return el;};
@@ -221,6 +243,7 @@
     }
     root=selected;
     renderFocus();
+    keepFocusedNodeVisible();
     if(!wasFocused){
       const target=window.scrollY+canvas.getBoundingClientRect().top-90;
       window.scrollTo({top:Math.max(0,target),behavior:'auto'});
@@ -240,7 +263,7 @@
   // Any non-control click outside a map node dismisses the active filter.
   // The depth control is exempt so its label and slider remain interactive.
   document.addEventListener('click',event=>{
-    if(root&&!event.target.closest('.map-node, #map-depth-row, #map-show-all')) restore();
+    if(root&&!event.target.closest('.map-node, #map-depth-row, #map-show-all, .map-view-toggle')) restore();
   });
   showAll.addEventListener('click',restore);
   depthInput.addEventListener('input',()=>{if(root)renderFocus();});
