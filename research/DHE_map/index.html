@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../../assets/styles.css">
   <link rel="stylesheet" href="map.css">
   <script src="map.js" defer></script>
+  <script src="../citation-tracker.js" data-citation-tracker defer></script>
 </head>
 <body>
   <header class="masthead"><div class="wrap"><a class="wordmark" href="../../">HORTANICA</a><div class="rule"></div><nav aria-label="Primary"><a href="../../">Home</a><a class="active" href="../">Research</a><a href="../../projects/">Projects</a><a href="../../about/">About</a></nav><div class="rule"></div></div></header>
@@ -22,6 +23,16 @@
       <p class="map-lede">Explore which brain and body systems are associated with each research paper, and how those papers fit within this program's four analytical phases.</p>
       <p class="map-disclaimer">This map records implicated systems in the current research portfolio. A connection is not a claim of unique anatomical localization or demonstrated causal attribution.</p>
     </header>
+
+    <section class="literature-tracker" aria-label="Research literature counts">
+      <p class="literature-tracker-heading">Sources informing the research</p>
+      <div class="literature-tracker-grid">
+        <div class="literature-metric literature-metric-primary"><strong data-citation-summary="uniqueWorks">445</strong><span>Unique cited works</span></div>
+        <div class="literature-metric"><strong data-citation-summary="referenceEntries">472</strong><span>Reference entries</span></div>
+        <div class="literature-metric"><strong data-citation-summary="papers">16</strong><span>Manuscripts</span></div>
+      </div>
+      <p class="literature-tracker-note">Counts use one selected bibliography per manuscript. Repeated works count once in the unique total. Sources include articles, books, and other publications.</p>
+    </section>
     <div class="map-tools" aria-label="Map tools">
       <label class="map-search-label" for="map-search">Find a phase, paper, or system</label>
       <div class="map-search-row"><input id="map-search" type="search" placeholder="Search the map…" autocomplete="off"><button id="map-reset" type="button">Clear</button></div>

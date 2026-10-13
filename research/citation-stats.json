@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-11",
+  "source": "research/DHE_map/Research_Portfolio_System_Map.xlsx — Citations",
+  "method": "One selected manuscript bibliography per portfolio paper. Repeated works are kept in per-paper counts and total entries; cross-paper uniqueness follows workbook Shared source ID.",
+  "scopeNote": "Referenced works include articles, books, chapters, standards and technical sources; not journal articles exclusively.",
+  "totals": {
+    "papers": 16,
+    "referenceEntries": 472,
+    "uniqueWorks": 445,
+    "repeatEntries": 27
+  },
+  "byPaper": {
+    "Boundary Theory": 36,
+    "Containment": 52,
+    "EndGame": 32,
+    "FuckYourFeelings": 26,
+    "FutureYou": 41,
+    "How Long Is a Thought?": 14,
+    "Icarus": 31,
+    "PhoneWalletKeys": 27,
+    "Pull": 28,
+    "Push": 50,
+    "Relevance": 20,
+    "Squirrel": 18,
+    "Time": 30,
+    "Weight": 25,
+    "WhatchyaDoin": 21,
+    "You Are Here": 21
+  },
+  "bySlug": {
+    "boundary-theory": 36,
+    "containment": 52,
+    "endgame": 32,
+    "fuckyourfeelings": 26,
+    "futureyou": 41,
+    "how-long-is-a-thought": 14,
+    "icarus": 31,
+    "phonewalletkeys": 27,
+    "pull": 28,
+    "push": 50,
+    "relevance": 20,
+    "squirrel": 18,
+    "time": 30,
+    "weight": 25,
+    "whatchyadoin": 21,
+    "you-are-here": 21
+  }
+}

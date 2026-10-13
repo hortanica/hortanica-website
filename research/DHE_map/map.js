@@ -32,7 +32,8 @@
   const make=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined) el.textContent=text;if(cls)el.className=cls;return el;};
   const S=(tag,attrs={},text)=>{const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));if(text!==undefined)el.textContent=String(text);return el;};
   const color=phase=>data.phases.find(p=>p.name===phase)?.color||'#89928c';
-  const phaseLabel=phase=>`Phase ${phase.order}: ${phase.name}`;
+  const phaseDisplayName=name=>name==='Construction'?'Framing':name;
+  const phaseLabel=phase=>`Phase ${phase.order}: ${phaseDisplayName(phase.name)}`;
   const depthDescription=[
     'Directly connected systems or papers.',
     'Also show papers or systems sharing those connections.',
@@ -275,10 +276,10 @@
       const detail=make('details',undefined,'mobile-phase');if(phase.name==='Foundation')detail.open=true;
       const summary=make('summary');summary.append(make('strong',`${phaseLabel(phase)} — ${phase.paperCount} paper${phase.paperCount===1?'':'s'}`));
       detail.append(summary,make('p',phase.description,'phase-tagline'));
-      const open=make('a',`Explore ${phase.name} phase →`,'phase-open');open.href=phase.url;detail.append(open);
+      const open=make('a',`Explore ${phaseDisplayName(phase.name)} phase →`,'phase-open');open.href=phase.url;detail.append(open);
       for(const paper of data.papers.filter(p=>p.phase===phase.name)){
         const pd=make('details',undefined,'mobile-paper');
-        pd.dataset.search=[phase.name,paper.name,paper.description,...data.edges.filter(e=>e.paper===paper.name).map(e=>e.system)].join(' ').toLowerCase();
+        pd.dataset.search=[phaseDisplayName(phase.name),phase.name,paper.name,paper.description,...data.edges.filter(e=>e.paper===paper.name).map(e=>e.system)].join(' ').toLowerCase();
         const sm=make('summary');sm.append(make('strong',paper.name),make('span',paper.description,'paper-tagline'));pd.append(sm);
         const link=make('a',paper.detailPending?'View current paper listing →':'Open paper page →','paper-open');link.href=paper.url;pd.append(link);
         const names=new Set(data.edges.filter(e=>e.paper===paper.name).map(e=>e.system));
@@ -309,7 +310,7 @@
       canvas.querySelectorAll('.map-node').forEach(n=>{
         const type=n.dataset.type,id=n.dataset.id;
         const desc=(type==='phase'?data.phases:type==='paper'?data.papers:data.systems).find(x=>x.name===id)?.description||'';
-        const match=(id+' '+desc).toLowerCase().includes(term);
+        const match=(id+' '+(type==='phase'?phaseDisplayName(id):'')+' '+desc).toLowerCase().includes(term);
         if(match)count++;
         n.classList.toggle('dimmed',!match);n.classList.toggle('emphasized',match);
       });

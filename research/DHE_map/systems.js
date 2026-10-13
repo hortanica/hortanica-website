@@ -55,7 +55,8 @@
   "thalamocortical-circuits": "Thalamocortical circuits are two-way connections between nuclei of the thalamus deep in the brain and regions of the cerebral cortex across its outer surface. They help coordinate the flow and timing of sensory, motor, and other information. Their repeated signaling is involved in attention, perception, sleep rhythms, and broader brain activity.",
   "ventral-striatum": "The ventral striatum lies deep in the front-lower part of the forebrain and includes the nucleus accumbens. It connects with prefrontal, limbic, and dopamine-signaling regions. These circuits help link expected outcomes to motivation and learning, making some options more likely to draw effort or approach behavior in a particular situation."
 });
-  const phaseTitle=phase=>`Phase ${phase.order}: ${phase.name}`;
+  const phaseDisplayName=name=>name==='Construction'?'Framing':name;
+  const phaseTitle=phase=>`Phase ${phase.order}: ${phaseDisplayName(phase.name)}`;
   function renderList(data){
     title.textContent='Brain & Body Systems';
     intro.textContent=`Explore ${data.systems.length} systems associated with ${data.papers.length} research papers. These short descriptions explain how a system may contribute to lived experience.`;
