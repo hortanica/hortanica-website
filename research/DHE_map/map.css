@@ -1,19 +1,19 @@
 /* DHE research map prototype; independent of the production site stylesheet. */
 .map-page { width: min(calc(100% - 40px), 1500px); margin: 0 auto; padding-bottom: 68px; }
-.map-heading { max-width: 900px; margin: 0 auto; padding: 60px 0 26px; text-align: center; }
-.map-heading .back-link { display: block; width: max-content; margin: 0 auto 26px; }
+.map-heading { width: 100%; max-width: none; margin: 0; padding: 60px 0 26px; text-align: left; }
+.map-heading .back-link { display: block; width: max-content; margin: 0 0 26px; }
 .map-heading .kicker { margin-bottom: 12px; }
 .map-heading h1 { font-size: clamp(2.4rem, 4.6vw, 3.8rem); margin: 0 0 16px; line-height: 1.1; }
-.map-lede { max-width: 760px; margin: 0 auto 15px; font-size: 1.06rem; line-height: 1.58; }
-.map-disclaimer { max-width: 760px; margin: 0 auto; font-size: .86rem; color: var(--muted); line-height: 1.48; font-style: italic; }
-.map-tools { max-width: 760px; margin: 0 auto 18px; }
+.map-lede { max-width: none; margin: 0 0 15px; font-size: 1.06rem; line-height: 1.58; }
+.map-disclaimer { max-width: none; margin: 0; font-size: .86rem; color: var(--muted); line-height: 1.48; font-style: italic; }
+.map-tools { width: 100%; max-width: none; margin: 0 0 18px; }
 .map-search-label { display:block; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--green-soft); font-weight: 700; margin-bottom: 6px; }
 .map-search-row { display:flex; gap: 10px; }
 .map-search-row input { flex: 1; min-width: 0; border: 1px solid var(--rule); background: #fff; border-radius: 4px; font: inherit; font-size: 16px; padding: 9px 12px; }
 .map-search-row input:focus { outline: 2px solid var(--green-soft); outline-offset: 1px; }
 .map-search-row button { cursor:pointer; border: 1px solid var(--rule); background: var(--panel); color: var(--green); border-radius: 4px; padding: 7px 16px; font: inherit; font-size: .9rem; }
 .map-search-row button:hover, .map-search-row button:focus-visible { background: #eae8e2; }
-.map-totals { font-size:.82rem; color:var(--muted); margin: 9px 0 0; text-align: center; }
+.map-totals { font-size:.82rem; color:var(--muted); margin: 9px 0 0; text-align: left; }
 .diagram-shell { border-top: 1px solid var(--rule); padding-top: 14px; }
 .diagram-guide { display:flex; align-items:center; justify-content: space-between; gap:20px; color:var(--muted); font-size:.86rem; padding: 0 6px 12px; }
 .diagram-guide a, .data-note a { color:var(--green); }
@@ -49,7 +49,7 @@
 .diagram-canvas .system-label { font-size:11px; font-weight:400; }
 .diagram-canvas .system-count { fill:#666b66; font-size:10px; font-weight:400; }
 .diagram-feedback { text-align:center; margin: 8px 0 4px; color:var(--muted); font-size:.85rem; }
-.data-note { max-width:760px; margin:22px auto 0; color:var(--muted); font-size:.81rem; text-align:center; line-height:1.6; }
+.data-note { max-width:none; margin:22px 0 0; color:var(--muted); font-size:.81rem; text-align:left; line-height:1.6; }
 .data-note code { font-size:.9em; }
 /* The visual map is also the mobile default; the text explorer remains available by toggle. */
 .map-view-toggle, .mobile-map-hint { display:none; }
